@@ -7,6 +7,10 @@ import Sites from '@/pages/Sites';
 import Projects from '@/pages/Projects';
 import Stories from '@/pages/Stories';
 import Workflow from '@/pages/Workflow';
+import Analytics from '@/pages/Analytics';
+import TeamManagement from '@/pages/TeamManagement';
+import DocumentCenter from '@/pages/DocumentCenter';
+import Settings from '@/pages/Settings';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +24,10 @@ const App: React.FC = () => {
           <Route path="projects" element={<Projects />} />
           <Route path="stories" element={<Stories />} />
           <Route path="workflow" element={<Workflow />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="team" element={<TeamManagement />} />
+          <Route path="documents" element={<DocumentCenter />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

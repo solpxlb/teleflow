@@ -8,7 +8,11 @@ import {
   GitBranch,
   LogOut,
   Menu,
-  Bell
+  Bell,
+  BarChart3,
+  Users,
+  FileText,
+  Settings as SettingsIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Copilot from '@/components/copilot/Copilot';
@@ -33,6 +37,10 @@ const Layout: React.FC = () => {
     { to: '/projects', icon: KanbanSquare, label: 'Tasks', roles: ['super_admin', 'admin', 'pm', 'team_lead', 'member'] },
     { to: '/stories', icon: GitBranch, label: 'Stories & Epics', roles: ['super_admin', 'admin', 'pm'] },
     { to: '/workflow', icon: GitBranch, label: 'Workflow Builder', roles: ['super_admin', 'admin'] },
+    { to: '/analytics', icon: BarChart3, label: 'Analytics', roles: ['super_admin', 'admin', 'pm'] },
+    { to: '/team', icon: Users, label: 'Team', roles: ['super_admin', 'admin', 'pm', 'team_lead'] },
+    { to: '/documents', icon: FileText, label: 'Documents', roles: ['super_admin', 'admin', 'pm', 'team_lead', 'member'] },
+    { to: '/settings', icon: SettingsIcon, label: 'Settings', roles: ['super_admin', 'admin'] },
   ];
 
   const filteredNavItems = navItems.filter(item => item.roles.includes(currentUser.role));
