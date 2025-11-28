@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Task } from '@/lib/mockData';
 import { useStore } from '@/lib/store';
-import { CheckSquare, Trash2, UserPlus, Tag, Flag, Calendar } from 'lucide-react';
+import { CheckSquare, Trash2, UserPlus, Tag, Flag } from 'lucide-react';
 
 interface BulkActionsProps {
     selectedTasks: string[];
@@ -10,7 +10,7 @@ interface BulkActionsProps {
 
 const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelection }) => {
     const { bulkUpdateTasks, bulkDeleteTasks, tasks } = useStore();
-    const [showActions, setShowActions] = useState(false);
+    const [, setShowActions] = useState(false);
 
     if (selectedTasks.length === 0) return null;
 

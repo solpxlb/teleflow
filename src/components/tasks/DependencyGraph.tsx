@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import ReactFlow, { Background, Controls, Node, Edge, Position } from 'react-flow-renderer';
 import { Task } from '@/lib/mockData';
-import { useStore } from '@/lib/store';
+
 import { AlertTriangle, CheckCircle } from 'lucide-react';
 
 interface DependencyGraphProps {

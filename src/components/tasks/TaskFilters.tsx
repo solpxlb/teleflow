@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Task } from '@/lib/mockData';
+
 import { useStore } from '@/lib/store';
 import { X, Save, User, Calendar, Tag, MapPin, BookOpen } from 'lucide-react';
 
@@ -135,8 +135,8 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ onFilterChange, onSavePreset 
                                 key={assigneeId}
                                 onClick={() => toggleArrayFilter('assignees', assigneeId)}
                                 className={`text-xs px-3 py-1 rounded-full border transition-colors ${filters.assignees.includes(assigneeId)
-                                        ? 'bg-blue-600 border-blue-500 text-white'
-                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                                    ? 'bg-blue-600 border-blue-500 text-white'
+                                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
                                     }`}
                             >
                                 User {assigneeId}
@@ -157,11 +157,11 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ onFilterChange, onSavePreset 
                                 key={priority}
                                 onClick={() => toggleArrayFilter('priorities', priority)}
                                 className={`text-xs px-3 py-1 rounded-full border capitalize transition-colors ${filters.priorities.includes(priority)
-                                        ? priority === 'urgent' ? 'bg-rose-600 border-rose-500 text-white' :
-                                            priority === 'high' ? 'bg-orange-600 border-orange-500 text-white' :
-                                                priority === 'medium' ? 'bg-amber-600 border-amber-500 text-white' :
-                                                    'bg-blue-600 border-blue-500 text-white'
-                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                                    ? priority === 'urgent' ? 'bg-rose-600 border-rose-500 text-white' :
+                                        priority === 'high' ? 'bg-orange-600 border-orange-500 text-white' :
+                                            priority === 'medium' ? 'bg-amber-600 border-amber-500 text-white' :
+                                                'bg-blue-600 border-blue-500 text-white'
+                                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
                                     }`}
                             >
                                 {priority}
@@ -179,8 +179,8 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ onFilterChange, onSavePreset 
                                 key={status}
                                 onClick={() => toggleArrayFilter('statuses', status)}
                                 className={`text-xs px-3 py-1 rounded-full border capitalize transition-colors ${filters.statuses.includes(status)
-                                        ? 'bg-blue-600 border-blue-500 text-white'
-                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                                    ? 'bg-blue-600 border-blue-500 text-white'
+                                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
                                     }`}
                             >
                                 {status.replace('_', ' ')}
@@ -201,8 +201,8 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ onFilterChange, onSavePreset 
                                 key={site.id}
                                 onClick={() => toggleArrayFilter('sites', site.id)}
                                 className={`text-xs px-3 py-1 rounded-full border transition-colors ${filters.sites.includes(site.id)
-                                        ? 'bg-blue-600 border-blue-500 text-white'
-                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                                    ? 'bg-blue-600 border-blue-500 text-white'
+                                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
                                     }`}
                             >
                                 {site.name}
@@ -223,8 +223,8 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ onFilterChange, onSavePreset 
                                 key={story.id}
                                 onClick={() => toggleArrayFilter('stories', story.id)}
                                 className={`text-xs px-3 py-1 rounded-full border transition-colors ${filters.stories.includes(story.id)
-                                        ? 'bg-blue-600 border-blue-500 text-white'
-                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                                    ? 'bg-blue-600 border-blue-500 text-white'
+                                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
                                     }`}
                             >
                                 {story.title}
@@ -246,8 +246,8 @@ const TaskFilters: React.FC<TaskFiltersProps> = ({ onFilterChange, onSavePreset 
                                     key={tag}
                                     onClick={() => toggleArrayFilter('tags', tag)}
                                     className={`text-xs px-3 py-1 rounded-full border transition-colors ${filters.tags.includes(tag)
-                                            ? 'bg-blue-600 border-blue-500 text-white'
-                                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                                        ? 'bg-blue-600 border-blue-500 text-white'
+                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
                                         }`}
                                 >
                                     {tag}

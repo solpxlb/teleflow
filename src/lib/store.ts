@@ -250,7 +250,7 @@ export const useStore = create<AppState>((set, get) => ({
     resources: state.resources.map(r => r.id === id ? { ...r, ...updates } : r)
   })),
 
-  scheduleResource: (resourceId, taskId, startDate, endDate) => {
+  scheduleResource: (resourceId, taskId, _startDate, endDate) => {
     get().updateResource(resourceId, {
       availability: 'in_use',
       assignedTo: taskId,

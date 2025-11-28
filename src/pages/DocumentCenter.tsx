@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
 import { useStore } from '@/lib/store';
 import { Document } from '@/lib/mockData';
-import { Upload, Search, Filter, FileText, Image, FileCode, FileCheck, Download, Eye, Trash2, Plus } from 'lucide-react';
+import { Upload, Search, FileText, Image, FileCode, FileCheck, Download, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
-
-const categoryIcons = {
-    design: FileCode,
-    legal: FileCheck,
-    compliance: FileCheck,
-    photo: Image,
-    report: FileText,
-};
 
 const typeIcons = {
     autocad: FileCode,

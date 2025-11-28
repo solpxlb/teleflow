@@ -1,7 +1,7 @@
 import React from 'react';
 import { Task } from '@/lib/mockData';
-import { useStore } from '@/lib/store';
-import { Calendar, Clock, User, Flag, CheckCircle, Circle } from 'lucide-react';
+
+import { Calendar, User, Flag, CheckCircle, Circle } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface TaskListViewProps {
@@ -113,7 +113,7 @@ const TaskListView: React.FC<TaskListViewProps> = ({ tasks, onTaskClick, selecte
                                         <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden max-w-[100px]">
                                             <div
                                                 className={`h-full rounded-full ${progress === 100 ? 'bg-emerald-500' :
-                                                        progress > 50 ? 'bg-blue-500' : 'bg-amber-500'
+                                                    progress > 50 ? 'bg-blue-500' : 'bg-amber-500'
                                                     }`}
                                                 style={{ width: `${progress}%` }}
                                             />

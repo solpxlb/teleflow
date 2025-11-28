@@ -124,7 +124,7 @@ const Projects: React.FC = () => {
             if (filters.assignees.length > 0 && !filters.assignees.includes(task.assigneeId)) return false;
             if (filters.priorities.length > 0 && !filters.priorities.includes(task.priority)) return false;
             if (filters.statuses.length > 0 && !filters.statuses.includes(task.status)) return false;
-            if (filters.sites.length > 0 && !filters.sites.includes(task.siteId)) return false;
+            if (filters.sites.length > 0 && task.siteId && !filters.sites.includes(task.siteId)) return false;
             if (filters.stories.length > 0 && task.storyId && !filters.stories.includes(task.storyId)) return false;
             if (filters.tags.length > 0 && !filters.tags.some(tag => task.tags.includes(tag))) return false;
             if (filters.dateRange.start && new Date(task.dueDate) < new Date(filters.dateRange.start)) return false;
@@ -187,8 +187,8 @@ const Projects: React.FC = () => {
                     <button
                         onClick={() => setShowFilters(!showFilters)}
                         className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${showFilters
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                             }`}
                     >
                         <Filter className="w-4 h-4" />
@@ -210,8 +210,8 @@ const Projects: React.FC = () => {
                             key={mode}
                             onClick={() => setViewMode(mode)}
                             className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors capitalize ${viewMode === mode
-                                    ? 'bg-blue-600 text-white'
-                                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                                ? 'bg-blue-600 text-white'
+                                : 'text-slate-400 hover:text-white hover:bg-slate-800'
                                 }`}
                         >
                             <Icon className="w-4 h-4" />

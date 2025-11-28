@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useStore } from '@/lib/store';
-import { BarChart3, TrendingUp, Clock, DollarSign, Users, Target, Calendar, Download } from 'lucide-react';
+import { BarChart3, TrendingUp, Clock, DollarSign, Users, Target, Download } from 'lucide-react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { format, subDays } from 'date-fns';
 
 const Analytics: React.FC = () => {
-    const { tasks, sites, timeEntries, workflowExecutions } = useStore();
+    const { tasks, sites } = useStore();
     const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d'>('30d');
 
     // Calculate metrics

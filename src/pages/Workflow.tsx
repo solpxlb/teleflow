@@ -12,8 +12,7 @@ import ReactFlow, {
     ReactFlowInstance,
     ReactFlowProvider
 } from 'react-flow-renderer';
-import { Send, Sparkles, Bot, Play, Save, MousePointer2, Box, ArrowRightLeft, CheckCircle2, Settings, Zap } from 'lucide-react';
-import { useStore } from '@/lib/store';
+import { Send, Sparkles, Bot, Play, Save, MousePointer2, Box, ArrowRightLeft, CheckCircle2, Settings } from 'lucide-react';
 import { WorkflowNode } from '@/lib/mockData';
 import WorkflowTemplates from '@/components/workflow/WorkflowTemplates';
 import WorkflowNodeEditor from '@/components/workflow/WorkflowNodeEditor';
@@ -42,7 +41,7 @@ const WorkflowContent: React.FC = () => {
     const [showExecution, setShowExecution] = useState(false);
     const [currentTemplate, setCurrentTemplate] = useState<string>('');
 
-    const { workflowTemplates } = useStore();
+
 
     const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -122,15 +121,15 @@ const WorkflowContent: React.FC = () => {
         }));
 
         const templateEdges: Edge[] = [];
-        template.nodes.forEach((node: WorkflowNode) => {
-            node.connections?.forEach((targetId: string) => {
+        template.nodes.forEach((node: WorkflowNode, index: number) => {
+            if (index < template.nodes.length - 1) {
                 templateEdges.push({
-                    id: `e${node.id}-${targetId}`,
+                    id: `e${node.id}-${template.nodes[index + 1].id}`,
                     source: node.id,
-                    target: targetId,
+                    target: template.nodes[index + 1].id,
                     animated: true,
                 });
-            });
+            }
         });
 
         setNodes(templateNodes);
@@ -138,12 +137,12 @@ const WorkflowContent: React.FC = () => {
         setMode('manual');
     };
 
-    const handleNodeClick = (event: React.MouseEvent, node: Node) => {
+    const handleNodeClick = (_event: React.MouseEvent, node: Node) => {
         const workflowNode: WorkflowNode = {
             id: node.id,
             type: node.type as any,
             data: node.data,
-            connections: edges.filter(e => e.source === node.id).map(e => e.target),
+            position: node.position,
         };
         setSelectedNode(workflowNode);
     };
@@ -162,7 +161,7 @@ const WorkflowContent: React.FC = () => {
             id: node.id,
             type: node.type as any,
             data: node.data,
-            connections: edges.filter(e => e.source === node.id).map(e => e.target),
+            position: node.position,
         }));
     };
 
@@ -176,8 +175,8 @@ const WorkflowContent: React.FC = () => {
                         <button
                             onClick={() => setMode('templates')}
                             className={`px-3 py-2 rounded-lg text-sm transition-colors ${mode === 'templates'
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-800 text-slate-400 hover:text-white'
                                 }`}
                         >
                             Templates
@@ -185,8 +184,8 @@ const WorkflowContent: React.FC = () => {
                         <button
                             onClick={() => setMode('manual')}
                             className={`px-3 py-2 rounded-lg text-sm transition-colors ${mode === 'manual'
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-800 text-slate-400 hover:text-white'
                                 }`}
                         >
                             Manual
@@ -194,8 +193,8 @@ const WorkflowContent: React.FC = () => {
                         <button
                             onClick={() => setMode('ai')}
                             className={`px-3 py-2 rounded-lg text-sm transition-colors ${mode === 'ai'
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-800 text-slate-400 hover:text-white'
                                 }`}
                         >
                             AI

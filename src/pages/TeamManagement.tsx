@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '@/lib/store';
 import { USERS } from '@/lib/mockData';
-import { Search, Plus, Mail, Phone, Award, TrendingUp, Calendar, Clock } from 'lucide-react';
+import { Search, Plus, Mail, Award, TrendingUp } from 'lucide-react';
 
 const TeamManagement: React.FC = () => {
     const { tasks } = useStore();
@@ -189,8 +189,8 @@ const TeamManagement: React.FC = () => {
                                 <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden">
                                     <div
                                         className={`h-full rounded-full ${(user.workload || 0) > 80 ? 'bg-rose-500' :
-                                                (user.workload || 0) > 60 ? 'bg-amber-500' :
-                                                    'bg-emerald-500'
+                                            (user.workload || 0) > 60 ? 'bg-amber-500' :
+                                                'bg-emerald-500'
                                             }`}
                                         style={{ width: `${user.workload}%` }}
                                     />
