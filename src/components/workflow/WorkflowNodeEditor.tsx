@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { WorkflowNode } from '@/lib/mockData';
+import { USERS } from '@/lib/mockData';
 import { X, User, Calendar, Clock, FileText, GitBranch, Bell, Upload, FileCode } from 'lucide-react';
 
 interface WorkflowNodeEditorProps {
@@ -26,36 +27,57 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
         onClose();
     };
 
+    const renderAssigneeSelector = (label: string = 'Assign To', helpText?: string) => (
+        <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+                <User className="w-4 h-4 inline mr-2" />
+                {label}
+            </label>
+            <select
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                value={config.assigneeId || ''}
+                onChange={(e) => setConfig({ ...config, assigneeId: e.target.value })}
+            >
+                <option value="">Select team member...</option>
+                {USERS.map(user => (
+                    <option key={user.id} value={user.id}>
+                        {user.name} ({user.role.replace('_', ' ').toUpperCase()})
+                    </option>
+                ))}
+            </select>
+            {config.assigneeId && (
+                <div className="mt-2 p-3 bg-slate-900 rounded-lg border border-slate-700">
+                    <div className="flex items-center gap-3">
+                        <img
+                            src={USERS.find(u => u.id === config.assigneeId)?.avatar}
+                            alt="Avatar"
+                            className="w-8 h-8 rounded-full"
+                        />
+                        <div className="flex-1">
+                            <div className="text-sm font-medium text-white">
+                                {USERS.find(u => u.id === config.assigneeId)?.name}
+                            </div>
+                            <div className="text-xs text-slate-400">
+                                {USERS.find(u => u.id === config.assigneeId)?.email}
+                            </div>
+                        </div>
+                    </div>
+                    {helpText && (
+                        <div className="text-xs text-slate-400 mt-2">
+                            {helpText}
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+
     const renderConfigFields = () => {
         switch (node.type) {
             case 'task':
                 return (
                     <>
-                        <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
-                                <User className="w-4 h-4 inline mr-2" />
-                                Assign To
-                            </label>
-                            <select
-                                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
-                                value={config.assigneeId || ''}
-                                onChange={(e) => setConfig({ ...config, assigneeId: e.target.value })}
-                            >
-                                <option value="">Select assignee...</option>
-                                <option value="u1">Alice Admin (Super Admin)</option>
-                                <option value="u2">Bob Manager (Project Manager)</option>
-                                <option value="u3">Charlie Tech (Technician)</option>
-                                <option value="u4">David Lead (Team Lead)</option>
-                                <option value="u5">Eve Member (Member)</option>
-                            </select>
-                            {config.assigneeId && (
-                                <div className="mt-2 p-2 bg-slate-900 rounded border border-slate-700">
-                                    <div className="text-xs text-slate-400">
-                                        Task will be automatically created and assigned when workflow executes
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        {renderAssigneeSelector('Assign To', 'Task will be automatically created and assigned when workflow executes')}
 
                         <div>
                             <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -104,10 +126,12 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
             case 'approval':
                 return (
                     <>
+                        {renderAssigneeSelector('Approver', 'This team member will be notified to approve this step')}
+
                         <div>
                             <label className="block text-sm font-medium text-slate-300 mb-2">
                                 <User className="w-4 h-4 inline mr-2" />
-                                Approver Role
+                                Fallback Approver Role
                             </label>
                             <select
                                 className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
@@ -119,6 +143,9 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
                                 <option value="admin">Admin</option>
                                 <option value="super_admin">Super Admin</option>
                             </select>
+                            <div className="text-xs text-slate-500 mt-1">
+                                Used if assigned approver is unavailable
+                            </div>
                         </div>
 
                         <div>
@@ -189,6 +216,8 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
             case 'notification':
                 return (
                     <>
+                        {renderAssigneeSelector('Notify Team Member', 'This team member will receive the notification')}
+
                         <div>
                             <label className="block text-sm font-medium text-slate-300 mb-2">
                                 <Bell className="w-4 h-4 inline mr-2" />
@@ -223,38 +252,44 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
 
             case 'document':
                 return (
-                    <div>
-                        <label className="block text-sm font-medium text-slate-300 mb-2">
-                            <Upload className="w-4 h-4 inline mr-2" />
-                            Required Document Types
-                        </label>
-                        <div className="space-y-2">
-                            {['PDF', 'Image', 'AutoCAD', 'Excel', 'Word'].map(type => (
-                                <label key={type} className="flex items-center gap-2 text-sm text-slate-300">
-                                    <input
-                                        type="checkbox"
-                                        className="rounded border-slate-600 bg-slate-800 text-blue-600 focus:ring-blue-500"
-                                        checked={config.allowedTypes?.includes(type) || false}
-                                        onChange={(e) => {
-                                            const types = config.allowedTypes || [];
-                                            setConfig({
-                                                ...config,
-                                                allowedTypes: e.target.checked
-                                                    ? [...types, type]
-                                                    : types.filter((t: string) => t !== type)
-                                            });
-                                        }}
-                                    />
-                                    {type}
-                                </label>
-                            ))}
+                    <>
+                        {renderAssigneeSelector('Assign Document Upload To', 'This team member will be responsible for uploading required documents')}
+
+                        <div>
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                                <Upload className="w-4 h-4 inline mr-2" />
+                                Required Document Types
+                            </label>
+                            <div className="space-y-2">
+                                {['PDF', 'Image', 'AutoCAD', 'Excel', 'Word'].map(type => (
+                                    <label key={type} className="flex items-center gap-2 text-sm text-slate-300">
+                                        <input
+                                            type="checkbox"
+                                            className="rounded border-slate-600 bg-slate-800 text-blue-600 focus:ring-blue-500"
+                                            checked={config.allowedTypes?.includes(type) || false}
+                                            onChange={(e) => {
+                                                const types = config.allowedTypes || [];
+                                                setConfig({
+                                                    ...config,
+                                                    allowedTypes: e.target.checked
+                                                        ? [...types, type]
+                                                        : types.filter((t: string) => t !== type)
+                                                });
+                                            }}
+                                        />
+                                        {type}
+                                    </label>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </>
                 );
 
             case 'autocad':
                 return (
                     <>
+                        {renderAssigneeSelector('Assign Review To', 'This team member will review the AI analysis results')}
+
                         <div>
                             <label className="block text-sm font-medium text-slate-300 mb-2">
                                 <FileCode className="w-4 h-4 inline mr-2" />
