@@ -113,27 +113,29 @@ const WorkflowContent: React.FC = () => {
 
     const handleLoadTemplate = (template: any) => {
         setCurrentTemplate(template.id);
-        const templateNodes: Node[] = template.nodes.map((node: WorkflowNode, index: number) => ({
+        
+        // Access nodes and edges from the steps JSONB column
+        const templateSteps = template.steps || {};
+        const templateNodes = templateSteps.nodes || [];
+        const templateEdges = templateSteps.edges || [];
+        
+        const nodes: Node[] = templateNodes.map((node: any) => ({
             id: node.id,
             type: node.type === 'start' ? 'input' : node.type === 'end' ? 'output' : 'default',
-            data: { label: node.data.label, config: node.data.config },
-            position: { x: 250, y: index * 100 + 25 },
+            data: { label: node.data?.label || 'Node', config: node.data?.config },
+            position: node.position || { x: 250, y: 100 },
         }));
 
-        const templateEdges: Edge[] = [];
-        template.nodes.forEach((node: WorkflowNode, index: number) => {
-            if (index < template.nodes.length - 1) {
-                templateEdges.push({
-                    id: `e${node.id}-${template.nodes[index + 1].id}`,
-                    source: node.id,
-                    target: template.nodes[index + 1].id,
-                    animated: true,
-                });
-            }
-        });
+        const edges: Edge[] = templateEdges.map((edge: any) => ({
+            id: edge.id,
+            source: edge.source,
+            target: edge.target,
+            animated: edge.animated || false,
+            label: edge.label,
+        }));
 
-        setNodes(templateNodes);
-        setEdges(templateEdges);
+        setNodes(nodes);
+        setEdges(edges);
         setMode('manual');
     };
 

@@ -13,6 +13,7 @@ import {
   Users,
   FileText,
   Settings as SettingsIcon,
+  Shield,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Copilot from '@/components/copilot/Copilot';
@@ -43,7 +44,12 @@ const Layout: React.FC = () => {
     { to: '/settings', icon: SettingsIcon, label: 'Settings', roles: ['super_admin', 'admin'] },
   ];
 
+  const adminItems = [
+    { to: '/admin/users', icon: Shield, label: 'User Management', roles: ['super_admin'] },
+  ];
+
   const filteredNavItems = navItems.filter(item => item.roles.includes(currentUser.role));
+  const filteredAdminItems = adminItems.filter(item => item.roles.includes(currentUser.role));
 
   return (
     <div className="flex h-screen bg-slate-950 text-slate-100 overflow-hidden font-sans">
@@ -63,7 +69,7 @@ const Layout: React.FC = () => {
           </div>
         </div>
 
-        <nav className="flex-1 py-6 px-3 space-y-1">
+        <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto">
           {filteredNavItems.map((item) => (
             <NavLink
               key={item.to}
@@ -79,6 +85,32 @@ const Layout: React.FC = () => {
               {sidebarOpen && <span className="font-medium">{item.label}</span>}
             </NavLink>
           ))}
+
+          {/* Admin Section */}
+          {filteredAdminItems.length > 0 && (
+            <>
+              {sidebarOpen && (
+                <div className="px-3 pt-6 pb-2">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Admin</p>
+                </div>
+              )}
+              {filteredAdminItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) => cn(
+                    "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors",
+                    isActive
+                      ? "bg-purple-600/10 text-purple-400 border border-purple-600/20"
+                      : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
+                  )}
+                >
+                  <item.icon className="w-5 h-5 shrink-0" />
+                  {sidebarOpen && <span className="font-medium">{item.label}</span>}
+                </NavLink>
+              ))}
+            </>
+          )}
         </nav>
 
         <div className="p-4 border-t border-slate-800">

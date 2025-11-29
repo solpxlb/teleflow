@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WorkflowNode } from '@/lib/mockData';
-import { USERS } from '@/lib/mockData';
+import { useStore } from '@/lib/store';
 import { X, User, Calendar, Clock, FileText, GitBranch, Bell, Upload, FileCode } from 'lucide-react';
 
 interface WorkflowNodeEditorProps {
@@ -10,6 +10,7 @@ interface WorkflowNodeEditorProps {
 }
 
 const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, onSave }) => {
+    const { users } = useStore();
     const [label, setLabel] = useState(node?.data.label || '');
     const [config, setConfig] = useState(node?.data.config || {});
 
@@ -39,7 +40,7 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
                 onChange={(e) => setConfig({ ...config, assigneeId: e.target.value })}
             >
                 <option value="">Select team member...</option>
-                {USERS.map(user => (
+                {users.map(user => (
                     <option key={user.id} value={user.id}>
                         {user.name} ({user.role.replace('_', ' ').toUpperCase()})
                     </option>
@@ -49,16 +50,16 @@ const WorkflowNodeEditor: React.FC<WorkflowNodeEditorProps> = ({ node, onClose, 
                 <div className="mt-2 p-3 bg-slate-900 rounded-lg border border-slate-700">
                     <div className="flex items-center gap-3">
                         <img
-                            src={USERS.find(u => u.id === config.assigneeId)?.avatar}
+                            src={users.find(u => u.id === config.assigneeId)?.avatar}
                             alt="Avatar"
                             className="w-8 h-8 rounded-full"
                         />
                         <div className="flex-1">
                             <div className="text-sm font-medium text-white">
-                                {USERS.find(u => u.id === config.assigneeId)?.name}
+                                {users.find(u => u.id === config.assigneeId)?.name}
                             </div>
                             <div className="text-xs text-slate-400">
-                                {USERS.find(u => u.id === config.assigneeId)?.email}
+                                {users.find(u => u.id === config.assigneeId)?.email}
                             </div>
                         </div>
                     </div>

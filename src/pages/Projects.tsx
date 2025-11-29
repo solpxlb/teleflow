@@ -61,11 +61,7 @@ const SortableTask = ({ task, onClick }: { task: Task; onClick: () => void }) =>
                     <Calendar className="w-3 h-3" />
                     <span>{format(new Date(task.dueDate), 'MMM d')}</span>
                 </div>
-                {task.assigneeId && (
-                    <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-xs text-white">
-                        {task.assigneeId.substring(1)}
-                    </div>
-                )}
+                {/* Assignee ID removed for cleaner UI */}
             </div>
         </div>
     );

@@ -9,7 +9,7 @@ interface WorkflowTemplatesProps {
     onCreateNew: () => void;
 }
 
-const categoryIcons = {
+const categoryIcons: Record<string, any> = {
     maintenance: Wrench,
     installation: Building,
     survey: FileCheck,
@@ -19,7 +19,7 @@ const categoryIcons = {
     custom: Plus,
 };
 
-const categoryColors = {
+const categoryColors: Record<string, string> = {
     maintenance: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
     installation: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
     survey: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
@@ -117,8 +117,9 @@ const WorkflowTemplates: React.FC<WorkflowTemplatesProps> = ({ onSelectTemplate,
                     </div>
                 ) : (
                     filteredTemplates.map(template => {
-                        const Icon = categoryIcons[template.category];
-                        const colorClass = categoryColors[template.category];
+                        const Icon = categoryIcons[template.category] || Plus;
+                        const colorClass = categoryColors[template.category] || categoryColors.custom;
+                        const nodeCount = template.steps?.nodes?.length || 0;
 
                         return (
                             <div
@@ -149,7 +150,7 @@ const WorkflowTemplates: React.FC<WorkflowTemplatesProps> = ({ onSelectTemplate,
 
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3 text-xs text-slate-500">
-                                        <span>{template.nodes.length} nodes</span>
+                                        <span>{nodeCount} nodes</span>
                                         <span>•</span>
                                         <span>{format(new Date(template.createdAt), 'MMM d, yyyy')}</span>
                                     </div>

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useStore } from '@/lib/store';
-import { USERS } from '@/lib/mockData';
 import { Search, Plus, Mail, Award, TrendingUp } from 'lucide-react';
-
 const TeamManagement: React.FC = () => {
-    const { tasks } = useStore();
+    const { tasks, users } = useStore();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedRole, setSelectedRole] = useState<string>('all');
 
-    const filteredUsers = USERS.filter(user => {
+    const filteredUsers = users.filter(user => {
         const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.email.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesRole = selectedRole === 'all' || user.role === selectedRole;
@@ -57,24 +55,24 @@ const TeamManagement: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                    <div className="text-2xl font-bold text-white mb-1">{USERS.length}</div>
+                    <div className="text-2xl font-bold text-white mb-1">{users.length}</div>
                     <div className="text-sm text-slate-400">Total Members</div>
                 </div>
                 <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
                     <div className="text-2xl font-bold text-emerald-500 mb-1">
-                        {USERS.filter(u => u.availability === 'available').length}
+                        {users.filter(u => u.availability === 'available').length}
                     </div>
                     <div className="text-sm text-slate-400">Available</div>
                 </div>
                 <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
                     <div className="text-2xl font-bold text-amber-500 mb-1">
-                        {USERS.filter(u => u.availability === 'busy').length}
+                        {users.filter(u => u.availability === 'busy').length}
                     </div>
                     <div className="text-sm text-slate-400">Busy</div>
                 </div>
                 <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
                     <div className="text-2xl font-bold text-blue-500 mb-1">
-                        {Math.round(USERS.reduce((sum, u) => sum + (u.workload || 0), 0) / USERS.length)}%
+                        {Math.round(users.reduce((sum, u) => sum + (u.workload || 0), 0) / (users.length || 1))}%
                     </div>
                     <div className="text-sm text-slate-400">Avg Workload</div>
                 </div>

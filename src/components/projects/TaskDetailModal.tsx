@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Task, USERS } from '@/lib/mockData';
+import { Task } from '@/lib/mockData';
+import { useStore } from '@/lib/store';
 import { X, Calendar, Tag, CheckSquare, MessageSquare, Paperclip, Send } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -9,9 +10,10 @@ interface TaskDetailModalProps {
 }
 
 const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
+    const { users } = useStore();
     const [activeTab, setActiveTab] = useState<'overview' | 'subtasks' | 'comments'>('overview');
-    const assignee = USERS.find(u => u.id === task.assigneeId);
-    const reporter = USERS.find(u => u.id === task.reporterId);
+    const assignee = users.find(u => u.id === task.assigneeId);
+    const reporter = users.find(u => u.id === task.reporterId);
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -161,7 +163,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                                     </div>
                                 ) : (
                                     task.comments.map(comment => {
-                                        const user = USERS.find(u => u.id === comment.userId);
+                                        const user = users.find(u => u.id === comment.userId);
                                         return (
                                             <div key={comment.id} className="flex gap-4">
                                                 <img src={user?.avatar} className="w-8 h-8 rounded-full" />
