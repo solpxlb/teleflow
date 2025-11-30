@@ -16,13 +16,15 @@ import BulkActions from '@/components/tasks/BulkActions';
 
 type ViewMode = 'kanban' | 'list' | 'calendar' | 'timeline' | 'dependencies';
 
-const SortableTask = ({ task, onClick }: { task: Task; onClick: () => void }) => {
+const SortableTask = ({ task, onClick, users }: { task: Task; onClick: () => void; users: any[] }) => {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id, data: { type: 'Task', task } });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
     };
+
+    const assignee = users.find(u => u.id === task.assigneeId);
 
     if (isDragging) {
         return (
@@ -38,36 +40,52 @@ const SortableTask = ({ task, onClick }: { task: Task; onClick: () => void }) =>
         <div
             ref={setNodeRef}
             style={style}
-            {...attributes}
-            {...listeners}
-            onClick={onClick}
-            className="bg-white p-4 rounded-lg border border-slate-200 hover:border-purple-500/50 shadow-sm group cursor-grab active:cursor-grabbing"
+            className="bg-white p-4 rounded-lg border border-slate-200 hover:border-purple-500/50 shadow-sm group"
         >
-            <div className="flex justify-between items-start mb-2">
-                <span className={`text-[10px] px-2 py-0.5 rounded border ${task.priority === 'urgent' ? 'bg-rose-500/10 text-rose-500 border-rose-500/20' :
-                    task.priority === 'high' ? 'bg-orange-500/10 text-orange-500 border-orange-500/20' :
-                        task.priority === 'medium' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
-                            'bg-blue-500/10 text-blue-500 border-blue-500/20'
-                    }`}>
-                    {task.priority.toUpperCase()}
-                </span>
-                <button className="text-slate-500 hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MoreHorizontal className="w-4 h-4" />
-                </button>
-            </div>
-            <h4 className="text-sm font-medium text-slate-700 mb-1">{task.title}</h4>
-            <div className="flex items-center justify-between text-xs text-slate-500">
-                <div className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    <span>{format(new Date(task.dueDate), 'MMM d')}</span>
+            {/* Drag handle area */}
+            <div 
+                {...attributes}
+                {...listeners}
+                className="cursor-grab active:cursor-grabbing mb-2"
+            >
+                <div className="flex justify-between items-start">
+                    <span className={`text-[10px] px-2 py-0.5 rounded border ${task.priority === 'urgent' ? 'bg-rose-500/10 text-rose-500 border-rose-500/20' :
+                        task.priority === 'high' ? 'bg-orange-500/10 text-orange-500 border-orange-500/20' :
+                            task.priority === 'medium' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
+                                'bg-blue-500/10 text-blue-500 border-blue-500/20'
+                        }`}>
+                        {task.priority.toUpperCase()}
+                    </span>
+                    <button className="text-slate-500 hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <MoreHorizontal className="w-4 h-4" />
+                    </button>
                 </div>
-                {/* Assignee ID removed for cleaner UI */}
+            </div>
+            
+            {/* Clickable content area */}
+            <div onClick={onClick} className="cursor-pointer">
+                <h4 className="text-sm font-medium text-slate-700 mb-2">{task.title}</h4>
+                <div className="flex items-center justify-between text-xs text-slate-500">
+                    <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        <span>{format(new Date(task.dueDate), 'MMM d')}</span>
+                    </div>
+                    {assignee && (
+                        <div className="flex items-center gap-1" title={assignee.name}>
+                            <img 
+                                src={assignee.avatar} 
+                                alt={assignee.name}
+                                className="w-5 h-5 rounded-full border border-slate-300"
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
 };
 
-const Column = ({ id, title, tasks, onTaskClick }: { id: string; title: string; tasks: Task[]; onTaskClick: (task: Task) => void }) => {
+const Column = ({ id, title, tasks, onTaskClick, users }: { id: string; title: string; tasks: Task[]; onTaskClick: (task: Task) => void; users: any[] }) => {
     const { setNodeRef } = useSortable({ id });
 
     return (
@@ -84,7 +102,7 @@ const Column = ({ id, title, tasks, onTaskClick }: { id: string; title: string; 
             <div ref={setNodeRef} className="flex-1 p-3 space-y-3 overflow-y-auto">
                 <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
                     {tasks.map(task => (
-                        <SortableTask key={task.id} task={task} onClick={() => onTaskClick(task)} />
+                        <SortableTask key={task.id} task={task} onClick={() => onTaskClick(task)} users={users} />
                     ))}
                 </SortableContext>
             </div>
@@ -93,7 +111,7 @@ const Column = ({ id, title, tasks, onTaskClick }: { id: string; title: string; 
 };
 
 const Projects: React.FC = () => {
-    const { tasks, moveTask } = useStore();
+    const { tasks, moveTask, users } = useStore();
     const [activeId, setActiveId] = useState<string | null>(null);
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
     const [viewMode, setViewMode] = useState<ViewMode>('kanban');
@@ -242,6 +260,7 @@ const Projects: React.FC = () => {
                                         title={column.title}
                                         tasks={filteredTasks.filter(t => t.status === column.status)}
                                         onTaskClick={setSelectedTask}
+                                        users={users}
                                     />
                                 ))}
                             </SortableContext>
