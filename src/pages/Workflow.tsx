@@ -172,13 +172,13 @@ const WorkflowContent: React.FC = () => {
             {/* Left Sidebar */}
             <div className="w-80 flex flex-col gap-4">
                 {/* Mode Selector */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-3">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3">
                     <div className="grid grid-cols-3 gap-2">
                         <button
                             onClick={() => setMode('templates')}
                             className={`px-3 py-2 rounded-lg text-sm transition-colors ${mode === 'templates'
                                 ? 'bg-blue-600 text-white'
-                                : 'bg-slate-800 text-slate-400 hover:text-white'
+                                : 'bg-white text-slate-600 hover:text-slate-900'
                                 }`}
                         >
                             Templates
@@ -187,7 +187,7 @@ const WorkflowContent: React.FC = () => {
                             onClick={() => setMode('manual')}
                             className={`px-3 py-2 rounded-lg text-sm transition-colors ${mode === 'manual'
                                 ? 'bg-blue-600 text-white'
-                                : 'bg-slate-800 text-slate-400 hover:text-white'
+                                : 'bg-white text-slate-600 hover:text-slate-900'
                                 }`}
                         >
                             Manual
@@ -196,7 +196,7 @@ const WorkflowContent: React.FC = () => {
                             onClick={() => setMode('ai')}
                             className={`px-3 py-2 rounded-lg text-sm transition-colors ${mode === 'ai'
                                 ? 'bg-blue-600 text-white'
-                                : 'bg-slate-800 text-slate-400 hover:text-white'
+                                : 'bg-white text-slate-600 hover:text-slate-900'
                                 }`}
                         >
                             AI
@@ -214,7 +214,7 @@ const WorkflowContent: React.FC = () => {
 
                 {/* Manual Mode - Node Palette */}
                 {mode === 'manual' && (
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex-1 overflow-y-auto">
+                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex-1 overflow-y-auto">
                         <h3 className="text-sm font-semibold text-white mb-3">Node Palette</h3>
                         <div className="space-y-2">
                             {[
@@ -230,18 +230,18 @@ const WorkflowContent: React.FC = () => {
                                     key={type}
                                     draggable
                                     onDragStart={(e) => onDragStart(e, type)}
-                                    className="bg-slate-800 p-3 rounded-lg border border-slate-700 hover:border-blue-500 cursor-grab active:cursor-grabbing transition-colors flex items-center gap-2"
+                                    className="bg-white p-3 rounded-lg border border-slate-200 hover:border-blue-500 cursor-grab active:cursor-grabbing transition-colors flex items-center gap-2"
                                 >
                                     <Icon className="w-4 h-4 text-blue-500" />
-                                    <span className="text-sm text-slate-200">{label}</span>
+                                    <span className="text-sm text-slate-700">{label}</span>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-4 pt-4 border-t border-slate-800">
+                        <div className="mt-4 pt-4 border-t border-slate-200">
                             <button
                                 onClick={() => setShowTriggers(!showTriggers)}
-                                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 justify-center"
+                                className="w-full bg-white hover:bg-slate-100 text-slate-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 justify-center"
                             >
                                 <Settings className="w-4 h-4" />
                                 Configure Triggers
@@ -252,13 +252,13 @@ const WorkflowContent: React.FC = () => {
 
                 {/* AI Mode */}
                 {mode === 'ai' && (
-                    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col">
+                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex-1 flex flex-col">
                         <div className="flex items-center gap-2 mb-4">
                             <Bot className="w-5 h-5 text-purple-500" />
-                            <h3 className="text-sm font-semibold text-white">AI Workflow Generator</h3>
+                            <h3 className="text-sm font-semibold text-slate-900">AI Workflow Generator</h3>
                         </div>
                         <textarea
-                            className="flex-1 bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 resize-none focus:outline-none focus:border-purple-500"
+                            className="flex-1 bg-white border border-slate-200 rounded-lg p-3 text-sm text-slate-700 resize-none focus:outline-none focus:border-purple-500"
                             placeholder="Describe your workflow... e.g., 'Create a workflow for tower installation with site survey, equipment delivery, and installation tasks'"
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
@@ -287,9 +287,9 @@ const WorkflowContent: React.FC = () => {
             {/* Main Canvas */}
             <div className="flex-1 flex flex-col gap-4">
                 {/* Toolbar */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl p-3 flex justify-between items-center">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex justify-between items-center">
                     <div className="flex gap-2">
-                        <button className="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+                        <button className="bg-white hover:bg-slate-100 text-slate-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
                             <Save className="w-4 h-4" />
                             Save
                         </button>
@@ -301,13 +301,13 @@ const WorkflowContent: React.FC = () => {
                             Test Run
                         </button>
                     </div>
-                    <div className="text-sm text-slate-400">
+                    <div className="text-sm text-slate-600">
                         {nodes.length} nodes, {edges.length} connections
                     </div>
                 </div>
 
                 {/* React Flow Canvas */}
-                <div className="flex-1 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden" ref={reactFlowWrapper}>
+                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
                         edges={edges}
@@ -321,7 +321,7 @@ const WorkflowContent: React.FC = () => {
                         fitView
                     >
                         <Background color="#334155" gap={16} />
-                        <Controls className="bg-slate-800 border-slate-700" />
+                        <Controls className="bg-white border-slate-200" />
                         <MiniMap
                             nodeColor={(node) => {
                                 switch (node.type) {
@@ -330,7 +330,7 @@ const WorkflowContent: React.FC = () => {
                                     default: return '#64748b';
                                 }
                             }}
-                            className="bg-slate-800 border border-slate-700"
+                            className="bg-white border border-slate-200"
                         />
                     </ReactFlow>
                 </div>
@@ -347,14 +347,14 @@ const WorkflowContent: React.FC = () => {
 
             {showTriggers && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-                    <div className="bg-slate-900 border border-slate-700 rounded-xl p-6 max-w-md w-full">
+                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 max-w-md w-full">
                         <WorkflowTriggers onSave={(trigger) => {
                             console.log('Trigger saved:', trigger);
                             setShowTriggers(false);
                         }} />
                         <button
                             onClick={() => setShowTriggers(false)}
-                            className="mt-4 w-full bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg transition-colors"
+                            className="mt-4 w-full bg-white hover:bg-slate-100 text-slate-600 px-4 py-2 rounded-lg transition-colors"
                         >
                             Close
                         </button>
@@ -377,8 +377,8 @@ const Workflow: React.FC = () => {
     return (
         <div className="h-full flex flex-col">
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-white">Workflow Builder</h1>
-                <p className="text-slate-400">Design automated workflows with AI assistance</p>
+                <h1 className="text-2xl font-bold text-slate-900">Workflow Builder</h1>
+                <p className="text-slate-600">Design automated workflows with AI assistance</p>
             </div>
             <div className="flex-1 overflow-hidden">
                 <ReactFlowProvider>

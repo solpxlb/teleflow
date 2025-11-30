@@ -67,12 +67,12 @@ const TaskTimelineView: React.FC<TaskTimelineViewProps> = ({ tasks, onTaskClick 
     };
 
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
             {/* Header */}
-            <div className="p-4 border-b border-slate-800 bg-slate-950">
+            <div className="p-4 border-b border-slate-200 bg-white">
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-white">Timeline View</h3>
-                    <div className="text-sm text-slate-400">
+                    <h3 className="text-lg font-bold text-slate-900">Timeline View</h3>
+                    <div className="text-sm text-slate-600">
                         {format(minDate, 'MMM d')} - {format(maxDate, 'MMM d, yyyy')}
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const TaskTimelineView: React.FC<TaskTimelineViewProps> = ({ tasks, onTaskClick 
             {/* Timeline */}
             <div className="p-4 overflow-x-auto">
                 {/* Time Scale */}
-                <div className="mb-4 relative h-8 border-b border-slate-800">
+                <div className="mb-4 relative h-8 border-b border-slate-200">
                     {Array.from({ length: Math.ceil(totalDays / 7) }).map((_, weekIndex) => {
                         const weekStart = new Date(minDate);
                         weekStart.setDate(weekStart.getDate() + weekIndex * 7);
@@ -90,7 +90,7 @@ const TaskTimelineView: React.FC<TaskTimelineViewProps> = ({ tasks, onTaskClick 
                         return (
                             <div
                                 key={weekIndex}
-                                className="absolute top-0 flex items-center gap-1 text-xs text-slate-400"
+                                className="absolute top-0 flex items-center gap-1 text-xs text-slate-600"
                                 style={{ left: `${left}%` }}
                             >
                                 <Calendar className="w-3 h-3" />
@@ -106,16 +106,16 @@ const TaskTimelineView: React.FC<TaskTimelineViewProps> = ({ tasks, onTaskClick 
                         <div key={assigneeId}>
                             <div className="flex items-center gap-2 mb-2">
                                 <User className="w-4 h-4 text-slate-500" />
-                                <span className="text-sm font-medium text-slate-300">User {assigneeId}</span>
+                                <span className="text-sm font-medium text-slate-600">User {assigneeId}</span>
                                 <span className="text-xs text-slate-500">({assigneeTasks.length} tasks)</span>
                             </div>
 
-                            <div className="relative h-12 bg-slate-950/50 rounded-lg border border-slate-800">
+                            <div className="relative h-12 bg-white/50 rounded-lg border border-slate-200">
                                 {/* Grid lines */}
                                 {Array.from({ length: Math.ceil(totalDays / 7) }).map((_, i) => (
                                     <div
                                         key={i}
-                                        className="absolute top-0 bottom-0 border-l border-slate-800/50"
+                                        className="absolute top-0 bottom-0 border-l border-slate-200/50"
                                         style={{ left: `${(i * 7 / totalDays) * 100}%` }}
                                     />
                                 ))}
@@ -144,39 +144,39 @@ const TaskTimelineView: React.FC<TaskTimelineViewProps> = ({ tasks, onTaskClick 
                 </div>
 
                 {tasks.length === 0 && (
-                    <div className="text-center py-12 text-slate-400">
+                    <div className="text-center py-12 text-slate-600">
                         No tasks to display
                     </div>
                 )}
             </div>
 
             {/* Legend */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/50">
+            <div className="p-4 border-t border-slate-200 bg-white/50">
                 <div className="flex items-center gap-4 text-xs">
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-rose-500 border-2 border-rose-600"></div>
-                        <span className="text-slate-400">Urgent</span>
+                        <span className="text-slate-600">Urgent</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-orange-500 border-2 border-orange-600"></div>
-                        <span className="text-slate-400">High</span>
+                        <span className="text-slate-600">High</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-amber-500 border-2 border-amber-600"></div>
-                        <span className="text-slate-400">Medium</span>
+                        <span className="text-slate-600">Medium</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-blue-500 border-2 border-blue-600"></div>
-                        <span className="text-slate-400">Low</span>
+                        <span className="text-slate-600">Low</span>
                     </div>
                     <div className="ml-auto flex items-center gap-4">
                         <div className="flex items-center gap-2">
                             <div className="w-4 h-4 rounded bg-slate-500 opacity-50"></div>
-                            <span className="text-slate-400">Completed</span>
+                            <span className="text-slate-600">Completed</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-4 h-4 rounded bg-slate-500 border-2 border-dashed border-slate-600"></div>
-                            <span className="text-slate-400">Blocked</span>
+                            <span className="text-slate-600">Blocked</span>
                         </div>
                     </div>
                 </div>

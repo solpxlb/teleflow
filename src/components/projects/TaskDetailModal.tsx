@@ -17,10 +17,10 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-900 w-full max-w-4xl h-[80vh] rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="bg-slate-50 w-full max-w-4xl h-[80vh] rounded-2xl border border-slate-200 shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
 
                 {/* Header */}
-                <div className="p-6 border-b border-slate-800 flex justify-between items-start bg-slate-900">
+                <div className="p-6 border-b border-slate-200 flex justify-between items-start bg-slate-50">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
                             <span className="text-xs font-mono text-slate-500">{task.id}</span>
@@ -31,50 +31,50 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                                 {task.priority.toUpperCase()}
                             </span>
                         </div>
-                        <h2 className="text-2xl font-bold text-white">{task.title}</h2>
+                        <h2 className="text-2xl font-bold text-slate-900">{task.title}</h2>
                     </div>
-                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
+                    <button onClick={onClose} className="text-slate-500 hover:text-slate-900 transition-colors">
                         <X className="w-6 h-6" />
                     </button>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex border-b border-slate-800 px-6 bg-slate-900/50">
+                <div className="flex border-b border-slate-200 px-6 bg-slate-50/50">
                     <button
                         onClick={() => setActiveTab('overview')}
-                        className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'overview' ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+                        className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'overview' ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-600 hover:text-slate-700'}`}
                     >
                         Overview
                     </button>
                     <button
                         onClick={() => setActiveTab('subtasks')}
-                        className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'subtasks' ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+                        className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'subtasks' ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-600 hover:text-slate-700'}`}
                     >
                         Subtasks ({task.subtasks.length})
                     </button>
                     <button
                         onClick={() => setActiveTab('comments')}
-                        className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'comments' ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+                        className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'comments' ? 'border-blue-500 text-blue-400' : 'border-transparent text-slate-600 hover:text-slate-700'}`}
                     >
                         Comments ({task.comments.length})
                     </button>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6 bg-slate-950/50">
+                <div className="flex-1 overflow-y-auto p-6 bg-white/50">
 
                     {/* Overview Tab */}
                     {activeTab === 'overview' && (
                         <div className="grid grid-cols-3 gap-8">
                             <div className="col-span-2 space-y-6">
                                 <div>
-                                    <h3 className="text-sm font-semibold text-slate-400 mb-2">Description</h3>
-                                    <p className="text-slate-200 leading-relaxed">{task.description}</p>
+                                    <h3 className="text-sm font-semibold text-slate-600 mb-2">Description</h3>
+                                    <p className="text-slate-700 leading-relaxed">{task.description}</p>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-sm font-semibold text-slate-400 mb-2">Attachments</h3>
-                                    <div className="border-2 border-dashed border-slate-800 rounded-xl p-8 text-center hover:border-slate-700 transition-colors cursor-pointer bg-slate-900/50">
+                                    <h3 className="text-sm font-semibold text-slate-600 mb-2">Attachments</h3>
+                                    <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center hover:border-slate-200 transition-colors cursor-pointer bg-slate-50/50">
                                         <Paperclip className="w-8 h-8 text-slate-600 mx-auto mb-2" />
                                         <p className="text-sm text-slate-500">Drag & drop files here, or click to upload</p>
                                     </div>
@@ -82,24 +82,24 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                             </div>
 
                             <div className="space-y-6">
-                                <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-4">
+                                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
                                     <div>
                                         <label className="text-xs text-slate-500 block mb-1">Assignee</label>
                                         <div className="flex items-center gap-2">
                                             <img src={assignee?.avatar} className="w-6 h-6 rounded-full" />
-                                            <span className="text-sm text-slate-200">{assignee?.name || 'Unassigned'}</span>
+                                            <span className="text-sm text-slate-700">{assignee?.name || 'Unassigned'}</span>
                                         </div>
                                     </div>
                                     <div>
                                         <label className="text-xs text-slate-500 block mb-1">Reporter</label>
                                         <div className="flex items-center gap-2">
                                             <img src={reporter?.avatar} className="w-6 h-6 rounded-full" />
-                                            <span className="text-sm text-slate-200">{reporter?.name || 'System'}</span>
+                                            <span className="text-sm text-slate-700">{reporter?.name || 'System'}</span>
                                         </div>
                                     </div>
                                     <div>
                                         <label className="text-xs text-slate-500 block mb-1">Due Date</label>
-                                        <div className="flex items-center gap-2 text-slate-200">
+                                        <div className="flex items-center gap-2 text-slate-700">
                                             <Calendar className="w-4 h-4 text-slate-500" />
                                             <span className="text-sm">{format(new Date(task.dueDate), 'MMM d, yyyy')}</span>
                                         </div>
@@ -108,7 +108,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                                         <label className="text-xs text-slate-500 block mb-1">Tags</label>
                                         <div className="flex flex-wrap gap-2">
                                             {task.tags.map(tag => (
-                                                <span key={tag} className="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded flex items-center gap-1">
+                                                <span key={tag} className="text-xs bg-white text-slate-600 px-2 py-1 rounded flex items-center gap-1">
                                                     <Tag className="w-3 h-3" /> {tag}
                                                 </span>
                                             ))}
@@ -127,7 +127,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                                 <input
                                     type="text"
                                     placeholder="Add a new subtask..."
-                                    className="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                                    className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                                 />
                                 <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg">Add</button>
                             </div>
@@ -140,11 +140,11 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                             ) : (
                                 <div className="space-y-2">
                                     {task.subtasks.map(sub => (
-                                        <div key={sub.id} className="flex items-center gap-3 p-3 bg-slate-900 border border-slate-800 rounded-lg group hover:border-slate-700 transition-colors">
+                                        <div key={sub.id} className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg group hover:border-slate-200 transition-colors">
                                             <div className={`w-5 h-5 rounded border flex items-center justify-center cursor-pointer ${sub.completed ? 'bg-blue-500 border-blue-500' : 'border-slate-600'}`}>
-                                                {sub.completed && <CheckSquare className="w-3 h-3 text-white" />}
+                                                {sub.completed && <CheckSquare className="w-3 h-3 text-slate-900" />}
                                             </div>
-                                            <span className={`text-sm ${sub.completed ? 'text-slate-500 line-through' : 'text-slate-200'}`}>{sub.title}</span>
+                                            <span className={`text-sm ${sub.completed ? 'text-slate-500 line-through' : 'text-slate-700'}`}>{sub.title}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -168,12 +168,12 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                                             <div key={comment.id} className="flex gap-4">
                                                 <img src={user?.avatar} className="w-8 h-8 rounded-full" />
                                                 <div className="flex-1">
-                                                    <div className="bg-slate-900 p-4 rounded-xl rounded-tl-none border border-slate-800">
+                                                    <div className="bg-slate-50 p-4 rounded-xl rounded-tl-none border border-slate-200">
                                                         <div className="flex justify-between items-center mb-2">
-                                                            <span className="font-semibold text-slate-200 text-sm">{user?.name}</span>
+                                                            <span className="font-semibold text-slate-700 text-sm">{user?.name}</span>
                                                             <span className="text-xs text-slate-500">{format(new Date(comment.timestamp), 'MMM d, h:mm a')}</span>
                                                         </div>
-                                                        <p className="text-slate-300 text-sm">{comment.text}</p>
+                                                        <p className="text-slate-600 text-sm">{comment.text}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,7 +185,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({ task, onClose }) => {
                             <div className="relative">
                                 <textarea
                                     placeholder="Write a comment..."
-                                    className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-4 pr-12 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500 resize-none h-24"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-4 pr-12 py-3 text-sm text-slate-700 focus:outline-none focus:border-blue-500 resize-none h-24"
                                 />
                                 <button className="absolute right-3 bottom-3 p-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg">
                                     <Send className="w-4 h-4" />

@@ -38,14 +38,14 @@ const Login: React.FC = () => {
         {/* Logo and Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
-            <Radio className="w-8 h-8 text-white" />
+            <Radio className="w-8 h-8 text-slate-900" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">TeleFlow</h1>
-          <p className="text-slate-400">Enterprise Telecom Infrastructure Management</p>
+          <p className="text-slate-600">Enterprise Telecom Infrastructure Management</p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 p-8">
+        <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-8">
           <h2 className="text-2xl font-bold text-white mb-6">Sign In</h2>
 
           {/* Error Alert */}
@@ -62,7 +62,7 @@ const Login: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-600 mb-2">
                 Email Address
               </label>
               <div className="relative">
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-11 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-11 pr-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                   placeholder="superadmin@teleflow.com"
                   disabled={isLoggingIn}
                   autoComplete="email"
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
 
             {/* Password Input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-600 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-11 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-11 pr-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                   placeholder="Enter your password"
                   disabled={isLoggingIn}
                   autoComplete="current-password"
@@ -120,10 +120,10 @@ const Login: React.FC = () => {
           {/* Demo Credentials */}
           <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
             <p className="text-xs text-blue-400 font-medium mb-2">Demo Credentials:</p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-600">
               Email: <span className="text-blue-400 font-mono">superadmin@teleflow.com</span>
             </p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-600">
               Password: <span className="text-blue-400 font-mono">SuperAdmin@2024!</span>
             </p>
           </div>

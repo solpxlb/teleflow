@@ -51,11 +51,11 @@ const Dashboard: React.FC = () => {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-white">Command Center</h1>
-          <p className="text-slate-400">Welcome back, {currentUser?.name}</p>
+          <h1 className="text-2xl font-bold text-slate-900">Command Center</h1>
+          <p className="text-slate-600">Welcome back, {currentUser?.name}</p>
         </div>
         <div className="flex gap-2">
-          <span className="bg-slate-800 text-slate-400 px-3 py-1 rounded-full text-sm border border-slate-700">
+          <span className="bg-white text-slate-600 px-3 py-1 rounded-full text-sm border border-slate-200">
             System Status: Optimal
           </span>
         </div>
@@ -63,57 +63,57 @@ const Dashboard: React.FC = () => {
 
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition-colors">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-lg hover:border-blue-500/50 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-blue-500/10 rounded-lg">
               <Server className="w-6 h-6 text-blue-500" />
             </div>
-            <span className="text-xs font-medium text-slate-400 bg-slate-900 px-2 py-1 rounded">Total</span>
+            <span className="text-xs font-medium text-slate-600 bg-slate-50 px-2 py-1 rounded">Total</span>
           </div>
-          <h3 className="text-3xl font-bold text-white mb-1">{totalSites}</h3>
-          <p className="text-sm text-slate-400">Active Sites</p>
+          <h3 className="text-3xl font-bold text-slate-900 mb-1">{totalSites}</h3>
+          <p className="text-sm text-slate-600">Active Sites</p>
         </div>
 
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg hover:border-rose-500/50 transition-colors">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-lg hover:border-rose-500/50 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-rose-500/10 rounded-lg">
               <AlertTriangle className="w-6 h-6 text-rose-500" />
             </div>
             <span className="text-xs font-medium text-rose-400 bg-rose-900/20 px-2 py-1 rounded">Critical</span>
           </div>
-          <h3 className="text-3xl font-bold text-white mb-1">{activeAlarms}</h3>
-          <p className="text-sm text-slate-400">Active Alarms</p>
+          <h3 className="text-3xl font-bold text-slate-900 mb-1">{activeAlarms}</h3>
+          <p className="text-sm text-slate-600">Active Alarms</p>
         </div>
 
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg hover:border-amber-500/50 transition-colors">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-lg hover:border-amber-500/50 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-amber-500/10 rounded-lg">
               <Activity className="w-6 h-6 text-amber-500" />
             </div>
             <span className="text-xs font-medium text-amber-400 bg-amber-900/20 px-2 py-1 rounded">Ongoing</span>
           </div>
-          <h3 className="text-3xl font-bold text-white mb-1">{maintenanceSites}</h3>
-          <p className="text-sm text-slate-400">In Maintenance</p>
+          <h3 className="text-3xl font-bold text-slate-900 mb-1">{maintenanceSites}</h3>
+          <p className="text-sm text-slate-600">In Maintenance</p>
         </div>
 
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg hover:border-emerald-500/50 transition-colors">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-lg hover:border-emerald-500/50 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <div className="p-3 bg-emerald-500/10 rounded-lg">
               <Clock className="w-6 h-6 text-emerald-500" />
             </div>
             <span className="text-xs font-medium text-emerald-400 bg-emerald-900/20 px-2 py-1 rounded">30 Days</span>
           </div>
-          <h3 className="text-3xl font-bold text-white mb-1">{leaseExpirations}</h3>
-          <p className="text-sm text-slate-400">Lease Expirations</p>
+          <h3 className="text-3xl font-bold text-slate-900 mb-1">{leaseExpirations}</h3>
+          <p className="text-sm text-slate-600">Lease Expirations</p>
         </div>
       </div>
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-lg">
           <div className="flex items-center gap-2 mb-6">
             <PieIcon className="w-5 h-5 text-purple-500" />
-            <h3 className="text-lg font-bold text-white">Task Distribution</h3>
+            <h3 className="text-lg font-bold text-slate-900">Task Distribution</h3>
           </div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -132,29 +132,29 @@ const Dashboard: React.FC = () => {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
-                  itemStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a' }}
+                  itemStyle={{ color: '#0f172a' }}
                 />
-                <Legend />
+                <Legend wrapperStyle={{ color: '#0f172a' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-lg">
           <div className="flex items-center gap-2 mb-6">
             <BarChart3 className="w-5 h-5 text-blue-500" />
-            <h3 className="text-lg font-bold text-white">Team Workload</h3>
+            <h3 className="text-lg font-bold text-slate-900">Team Workload</h3>
           </div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={userData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                <XAxis dataKey="name" stroke="#94a3b8" />
-                <YAxis stroke="#94a3b8" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
+                <XAxis dataKey="name" stroke="#475569" />
+                <YAxis stroke="#475569" />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
-                  cursor={{ fill: '#334155', opacity: 0.2 }}
+                  contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a' }}
+                  cursor={{ fill: '#e2e8f0', opacity: 0.3 }}
                 />
                 <Bar dataKey="tasks" fill="#3b82f6" radius={[4, 4, 0, 0]} />
               </BarChart>
@@ -165,11 +165,11 @@ const Dashboard: React.FC = () => {
 
       {/* Map and Activity Feed */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[500px]">
-        <div className="lg:col-span-2 bg-slate-800 rounded-xl border border-slate-700 overflow-hidden shadow-lg relative z-0">
+        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 overflow-hidden shadow-lg relative z-0">
           <MapContainer center={[40.7128, -74.0060]} zoom={10} style={{ height: '100%', width: '100%' }}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {sites.map(site => (
               <Marker key={site.id} position={[site.lat, site.lng]}>
@@ -185,16 +185,16 @@ const Dashboard: React.FC = () => {
           </MapContainer>
         </div>
 
-        <div className="bg-slate-800 rounded-xl border border-slate-700 shadow-lg flex flex-col">
-          <div className="p-4 border-b border-slate-700">
-            <h3 className="font-bold text-white flex items-center gap-2">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-lg flex flex-col">
+          <div className="p-4 border-b border-slate-200">
+            <h3 className="font-bold text-slate-900 flex items-center gap-2">
               <Activity className="w-4 h-4 text-blue-500" />
               Activity Feed
             </h3>
           </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {notifications.map(notification => (
-              <div key={notification.id} className="flex gap-3 items-start p-3 rounded-lg bg-slate-900/50 border border-slate-700/50 hover:border-slate-600 transition-colors">
+              <div key={notification.id} className="flex gap-3 items-start p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-400 transition-colors">
                 <div className={`mt-1 p-1.5 rounded-full flex-shrink-0 ${notification.type === 'error' ? 'bg-rose-500/10 text-rose-500' :
                   notification.type === 'warning' ? 'bg-amber-500/10 text-amber-500' :
                     notification.type === 'success' ? 'bg-emerald-500/10 text-emerald-500' :
@@ -206,8 +206,8 @@ const Dashboard: React.FC = () => {
                         <Activity className="w-3 h-3" />}
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-slate-200">{notification.title}</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">{notification.message}</p>
+                  <h4 className="text-sm font-medium text-slate-700">{notification.title}</h4>
+                  <p className="text-xs text-slate-600 mt-0.5">{notification.message}</p>
                   <span className="text-[10px] text-slate-500 mt-2 block">
                     {formatDistanceToNow(new Date(notification.timestamp), { addSuffix: true })}
                   </span>

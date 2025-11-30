@@ -17,7 +17,7 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
     };
 
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
             <h3 className="text-lg font-bold text-white mb-4">Workflow Triggers</h3>
 
             {/* Trigger Type Selection */}
@@ -26,7 +26,7 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                     onClick={() => setTriggerType('manual')}
                     className={`p-3 rounded-lg border transition-all ${triggerType === 'manual'
                             ? 'bg-blue-500/10 border-blue-500 text-blue-400'
-                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-600'
                         }`}
                 >
                     <Zap className="w-5 h-5 mx-auto mb-1" />
@@ -37,7 +37,7 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                     onClick={() => setTriggerType('scheduled')}
                     className={`p-3 rounded-lg border transition-all ${triggerType === 'scheduled'
                             ? 'bg-blue-500/10 border-blue-500 text-blue-400'
-                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-600'
                         }`}
                 >
                     <Clock className="w-5 h-5 mx-auto mb-1" />
@@ -48,7 +48,7 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                     onClick={() => setTriggerType('event')}
                     className={`p-3 rounded-lg border transition-all ${triggerType === 'event'
                             ? 'bg-blue-500/10 border-blue-500 text-blue-400'
-                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-600'
                         }`}
                 >
                     <Calendar className="w-5 h-5 mx-auto mb-1" />
@@ -59,7 +59,7 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                     onClick={() => setTriggerType('webhook')}
                     className={`p-3 rounded-lg border transition-all ${triggerType === 'webhook'
                             ? 'bg-blue-500/10 border-blue-500 text-blue-400'
-                            : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-600'
                         }`}
                 >
                     <Webhook className="w-5 h-5 mx-auto mb-1" />
@@ -70,8 +70,8 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
             {/* Configuration based on type */}
             <div className="space-y-3">
                 {triggerType === 'manual' && (
-                    <div className="bg-slate-800/50 p-3 rounded-lg">
-                        <p className="text-sm text-slate-400">
+                    <div className="bg-white/50 p-3 rounded-lg">
+                        <p className="text-sm text-slate-600">
                             This workflow will be triggered manually by users.
                         </p>
                     </div>
@@ -80,11 +80,11 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                 {triggerType === 'scheduled' && (
                     <>
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label className="block text-sm font-medium text-slate-600 mb-2">
                                 Schedule Type
                             </label>
                             <select
-                                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                                 value={config.scheduleType || 'daily'}
                                 onChange={(e) => setConfig({ ...config, scheduleType: e.target.value })}
                             >
@@ -97,12 +97,12 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
 
                         {config.scheduleType === 'custom' && (
                             <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
+                                <label className="block text-sm font-medium text-slate-600 mb-2">
                                     Cron Expression
                                 </label>
                                 <input
                                     type="text"
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500 font-mono text-sm"
+                                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500 font-mono text-sm"
                                     value={config.cronExpression || ''}
                                     onChange={(e) => setConfig({ ...config, cronExpression: e.target.value })}
                                     placeholder="0 0 * * *"
@@ -112,12 +112,12 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                         )}
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label className="block text-sm font-medium text-slate-600 mb-2">
                                 Time
                             </label>
                             <input
                                 type="time"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                                 value={config.time || '09:00'}
                                 onChange={(e) => setConfig({ ...config, time: e.target.value })}
                             />
@@ -128,11 +128,11 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                 {triggerType === 'event' && (
                     <>
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label className="block text-sm font-medium text-slate-600 mb-2">
                                 Event Type
                             </label>
                             <select
-                                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                                 value={config.eventType || 'site_status_change'}
                                 onChange={(e) => setConfig({ ...config, eventType: e.target.value })}
                             >
@@ -145,12 +145,12 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label className="block text-sm font-medium text-slate-600 mb-2">
                                 Condition
                             </label>
                             <input
                                 type="text"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                                 value={config.condition || ''}
                                 onChange={(e) => setConfig({ ...config, condition: e.target.value })}
                                 placeholder="e.g., battery < 20%"
@@ -162,19 +162,19 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                 {triggerType === 'webhook' && (
                     <>
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label className="block text-sm font-medium text-slate-600 mb-2">
                                 Webhook URL
                             </label>
                             <div className="flex gap-2">
                                 <input
                                     type="text"
-                                    className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500 font-mono text-sm"
+                                    className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500 font-mono text-sm"
                                     value={`https://api.teleflow.com/webhooks/${Math.random().toString(36).substr(2, 9)}`}
                                     readOnly
                                 />
                                 <button
                                     onClick={() => navigator.clipboard.writeText(`https://api.teleflow.com/webhooks/${Math.random().toString(36).substr(2, 9)}`)}
-                                    className="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors text-sm"
+                                    className="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-600 rounded-lg transition-colors text-sm"
                                 >
                                     Copy
                                 </button>
@@ -182,11 +182,11 @@ const WorkflowTriggers: React.FC<WorkflowTriggersProps> = ({ onSave }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                            <label className="block text-sm font-medium text-slate-600 mb-2">
                                 Authentication
                             </label>
                             <select
-                                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                                 value={config.auth || 'api_key'}
                                 onChange={(e) => setConfig({ ...config, auth: e.target.value })}
                             >

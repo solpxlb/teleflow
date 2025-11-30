@@ -32,22 +32,22 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
 
     return (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-            <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-4 min-w-[500px]">
+            <div className="bg-white border border-slate-200 rounded-xl shadow-2xl p-4 min-w-[500px]">
                 <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
                             <CheckSquare className="w-5 h-5 text-blue-500" />
-                            <span className="font-semibold text-white">{selectedTasks.length} tasks selected</span>
+                            <span className="font-semibold text-slate-900">{selectedTasks.length} tasks selected</span>
                         </div>
                         {totalEstimatedHours > 0 && (
-                            <span className="text-sm text-slate-400">
+                            <span className="text-sm text-slate-600">
                                 ({totalEstimatedHours}h estimated)
                             </span>
                         )}
                     </div>
                     <button
                         onClick={onClearSelection}
-                        className="text-slate-400 hover:text-white transition-colors text-sm"
+                        className="text-slate-600 hover:text-slate-900 transition-colors text-sm"
                     >
                         Clear
                     </button>
@@ -60,12 +60,12 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
                             <UserPlus className="w-4 h-4" />
                             Assign
                         </button>
-                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-900 border border-slate-700 rounded-lg shadow-xl p-2 min-w-[150px]">
+                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-50 border border-slate-200 rounded-lg shadow-xl p-2 min-w-[150px]">
                             {['u1', 'u2', 'u3', 'u4', 'u5'].map(userId => (
                                 <button
                                     key={userId}
                                     onClick={() => handleBulkUpdate({ assigneeId: userId })}
-                                    className="w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 rounded transition-colors"
+                                    className="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-white rounded transition-colors"
                                 >
                                     User {userId}
                                 </button>
@@ -79,12 +79,12 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
                             <Flag className="w-4 h-4" />
                             Status
                         </button>
-                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-900 border border-slate-700 rounded-lg shadow-xl p-2 min-w-[150px]">
+                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-50 border border-slate-200 rounded-lg shadow-xl p-2 min-w-[150px]">
                             {['todo', 'in_progress', 'review', 'completed', 'blocked'].map(status => (
                                 <button
                                     key={status}
                                     onClick={() => handleBulkUpdate({ status: status as Task['status'] })}
-                                    className="w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 rounded transition-colors capitalize"
+                                    className="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-white rounded transition-colors capitalize"
                                 >
                                     {status.replace('_', ' ')}
                                 </button>
@@ -98,12 +98,12 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
                             <Flag className="w-4 h-4" />
                             Priority
                         </button>
-                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-900 border border-slate-700 rounded-lg shadow-xl p-2 min-w-[150px]">
+                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-50 border border-slate-200 rounded-lg shadow-xl p-2 min-w-[150px]">
                             {['low', 'medium', 'high', 'urgent'].map(priority => (
                                 <button
                                     key={priority}
                                     onClick={() => handleBulkUpdate({ priority: priority as Task['priority'] })}
-                                    className="w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 rounded transition-colors capitalize"
+                                    className="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-white rounded transition-colors capitalize"
                                 >
                                     {priority}
                                 </button>
@@ -117,7 +117,7 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
                             <Tag className="w-4 h-4" />
                             Add Tag
                         </button>
-                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-900 border border-slate-700 rounded-lg shadow-xl p-2 min-w-[150px]">
+                        <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block bg-slate-50 border border-slate-200 rounded-lg shadow-xl p-2 min-w-[150px]">
                             {['urgent', 'blocked', 'review-needed', 'high-priority'].map(tag => (
                                 <button
                                     key={tag}
@@ -128,7 +128,7 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
                                             }
                                         });
                                     }}
-                                    className="w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 rounded transition-colors"
+                                    className="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-white rounded transition-colors"
                                 >
                                     {tag}
                                 </button>
@@ -147,7 +147,7 @@ const BulkActions: React.FC<BulkActionsProps> = ({ selectedTasks, onClearSelecti
                 </div>
 
                 {/* Quick Stats */}
-                <div className="mt-3 pt-3 border-t border-slate-700 flex gap-4 text-xs text-slate-400">
+                <div className="mt-3 pt-3 border-t border-slate-200 flex gap-4 text-xs text-slate-600">
                     <span>{selectedTasksData.filter(t => t.status === 'completed').length} completed</span>
                     <span>{selectedTasksData.filter(t => t.status === 'in_progress').length} in progress</span>
                     <span>{selectedTasksData.filter(t => t.status === 'blocked').length} blocked</span>

@@ -54,9 +54,9 @@ const AuthDebug: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 p-8 text-white">
+    <div className="min-h-screen bg-slate-50 p-8 text-slate-900">
       <h1 className="text-2xl font-bold mb-6">Authentication Debug</h1>
-      <div className="bg-slate-800 p-6 rounded-lg">
+      <div className="bg-white p-6 rounded-lg">
         <pre className="text-sm">{JSON.stringify(status, null, 2)}</pre>
       </div>
     </div>

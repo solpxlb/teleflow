@@ -29,7 +29,7 @@ const SortableTask = ({ task, onClick }: { task: Task; onClick: () => void }) =>
             <div
                 ref={setNodeRef}
                 style={style}
-                className="bg-slate-800/50 p-4 rounded-lg border border-blue-500/50 opacity-50 h-[120px]"
+                className="bg-white/50 p-4 rounded-lg border border-blue-500/50 opacity-50 h-[120px]"
             />
         );
     }
@@ -41,7 +41,7 @@ const SortableTask = ({ task, onClick }: { task: Task; onClick: () => void }) =>
             {...attributes}
             {...listeners}
             onClick={onClick}
-            className="bg-slate-800 p-4 rounded-lg border border-slate-700 hover:border-purple-500/50 shadow-sm group cursor-grab active:cursor-grabbing"
+            className="bg-white p-4 rounded-lg border border-slate-200 hover:border-purple-500/50 shadow-sm group cursor-grab active:cursor-grabbing"
         >
             <div className="flex justify-between items-start mb-2">
                 <span className={`text-[10px] px-2 py-0.5 rounded border ${task.priority === 'urgent' ? 'bg-rose-500/10 text-rose-500 border-rose-500/20' :
@@ -51,11 +51,11 @@ const SortableTask = ({ task, onClick }: { task: Task; onClick: () => void }) =>
                     }`}>
                     {task.priority.toUpperCase()}
                 </span>
-                <button className="text-slate-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                <button className="text-slate-500 hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity">
                     <MoreHorizontal className="w-4 h-4" />
                 </button>
             </div>
-            <h4 className="text-sm font-medium text-slate-200 mb-1">{task.title}</h4>
+            <h4 className="text-sm font-medium text-slate-700 mb-1">{task.title}</h4>
             <div className="flex items-center justify-between text-xs text-slate-500">
                 <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
@@ -71,13 +71,13 @@ const Column = ({ id, title, tasks, onTaskClick }: { id: string; title: string; 
     const { setNodeRef } = useSortable({ id });
 
     return (
-        <div className="flex flex-col h-full min-w-[300px] w-[300px] bg-slate-900/50 rounded-xl border border-slate-800/50">
-            <div className="p-4 border-b border-slate-800/50 flex justify-between items-center">
+        <div className="flex flex-col h-full min-w-[300px] w-[300px] bg-slate-50/50 rounded-xl border border-slate-200/50">
+            <div className="p-4 border-b border-slate-200/50 flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-slate-200">{title}</h3>
-                    <span className="bg-slate-800 text-slate-400 text-xs px-2 py-0.5 rounded-full">{tasks.length}</span>
+                    <h3 className="font-semibold text-slate-700">{title}</h3>
+                    <span className="bg-white text-slate-600 text-xs px-2 py-0.5 rounded-full">{tasks.length}</span>
                 </div>
-                <button className="text-slate-500 hover:text-slate-300">
+                <button className="text-slate-500 hover:text-slate-600">
                     <Plus className="w-4 h-4" />
                 </button>
             </div>
@@ -176,15 +176,15 @@ const Projects: React.FC = () => {
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Tasks & Projects</h1>
-                    <p className="text-slate-400">{filteredTasks.length} tasks</p>
+                    <h1 className="text-2xl font-bold text-slate-900">Tasks & Projects</h1>
+                    <p className="text-slate-600">{filteredTasks.length} tasks</p>
                 </div>
                 <div className="flex gap-2">
                     <button
                         onClick={() => setShowFilters(!showFilters)}
                         className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${showFilters
                             ? 'bg-blue-600 text-white'
-                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            : 'bg-white text-slate-600 hover:bg-slate-100'
                             }`}
                     >
                         <Filter className="w-4 h-4" />
@@ -198,7 +198,7 @@ const Projects: React.FC = () => {
             </div>
 
             {/* View Mode Selector */}
-            <div className="flex gap-2 mb-6 bg-slate-900 p-1 rounded-lg border border-slate-800 w-fit">
+            <div className="flex gap-2 mb-6 bg-slate-50 p-1 rounded-lg border border-slate-200 w-fit">
                 {(Object.keys(viewIcons) as ViewMode[]).map(mode => {
                     const Icon = viewIcons[mode];
                     return (
@@ -207,7 +207,7 @@ const Projects: React.FC = () => {
                             onClick={() => setViewMode(mode)}
                             className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-colors capitalize ${viewMode === mode
                                 ? 'bg-blue-600 text-white'
-                                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                                : 'text-slate-600 hover:text-slate-900 hover:bg-white'
                                 }`}
                         >
                             <Icon className="w-4 h-4" />
@@ -248,8 +248,8 @@ const Projects: React.FC = () => {
                         </div>
                         <DragOverlay>
                             {activeId ? (
-                                <div className="bg-slate-800 p-4 rounded-lg border border-blue-500 shadow-xl opacity-90">
-                                    <div className="text-sm font-medium text-white">
+                                <div className="bg-white p-4 rounded-lg border border-blue-500 shadow-xl opacity-90">
+                                    <div className="text-sm font-medium text-slate-900">
                                         {tasks.find(t => t.id === activeId)?.title}
                                     </div>
                                 </div>

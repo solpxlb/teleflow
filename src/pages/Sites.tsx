@@ -21,8 +21,8 @@ const Sites: React.FC = () => {
         <div className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Site Registry</h1>
-                    <p className="text-slate-400">Manage telecom infrastructure assets</p>
+                    <h1 className="text-2xl font-bold text-slate-900">Site Registry</h1>
+                    <p className="text-slate-600">Manage telecom infrastructure assets</p>
                 </div>
                 <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                     <Plus className="w-4 h-4" />
@@ -31,13 +31,13 @@ const Sites: React.FC = () => {
             </div>
 
             {/* Filters */}
-            <div className="bg-slate-900 border border-slate-800 p-4 rounded-xl flex flex-col md:flex-row gap-4">
+            <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                     <input
                         type="text"
                         placeholder="Search sites by name, ID, or address..."
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-white border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -45,7 +45,7 @@ const Sites: React.FC = () => {
                 <div className="flex items-center gap-2">
                     <Filter className="w-4 h-4 text-slate-500" />
                     <select
-                        className="bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                        className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
@@ -58,10 +58,10 @@ const Sites: React.FC = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
+                        <thead className="bg-white text-slate-600 border-b border-slate-200">
                             <tr>
                                 <th className="px-6 py-4 font-medium">Site ID & Name</th>
                                 <th className="px-6 py-4 font-medium">Status</th>
@@ -74,14 +74,14 @@ const Sites: React.FC = () => {
                         </thead>
                         <tbody className="divide-y divide-slate-800">
                             {filteredSites.map((site) => (
-                                <tr key={site.id} className="hover:bg-slate-800/50 transition-colors group cursor-pointer">
+                                <tr key={site.id} className="hover:bg-white/50 transition-colors group cursor-pointer">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-2 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
-                                                <Signal className="w-4 h-4 text-slate-400" />
+                                            <div className="p-2 bg-white rounded-lg group-hover:bg-slate-100 transition-colors">
+                                                <Signal className="w-4 h-4 text-slate-600" />
                                             </div>
                                             <div>
-                                                <p className="font-medium text-white">{site.name}</p>
+                                                <p className="font-medium text-slate-900">{site.name}</p>
                                                 <p className="text-xs text-slate-500">{site.id} • {site.address}</p>
                                             </div>
                                         </div>
@@ -98,9 +98,9 @@ const Sites: React.FC = () => {
                                             {site.status.charAt(0).toUpperCase() + site.status.slice(1)}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-slate-300">{site.tenant}</td>
+                                    <td className="px-6 py-4 text-slate-600">{site.tenant}</td>
                                     <td className="px-6 py-4">
-                                        <div className="flex items-center gap-2 text-slate-300">
+                                        <div className="flex items-center gap-2 text-slate-600">
                                             <Zap className="w-4 h-4 text-yellow-500" />
                                             {site.powerType}
                                         </div>
@@ -110,7 +110,7 @@ const Sites: React.FC = () => {
                                             <Battery className={`w-4 h-4 ${site.batteryLevel > 50 ? 'text-emerald-500' :
                                                 site.batteryLevel > 20 ? 'text-amber-500' : 'text-rose-500'
                                                 }`} />
-                                            <div className="w-24 h-2 bg-slate-800 rounded-full overflow-hidden">
+                                            <div className="w-24 h-2 bg-white rounded-full overflow-hidden">
                                                 <div
                                                     className={`h-full rounded-full ${site.batteryLevel > 50 ? 'bg-emerald-500' :
                                                         site.batteryLevel > 20 ? 'bg-amber-500' : 'bg-rose-500'
@@ -118,10 +118,10 @@ const Sites: React.FC = () => {
                                                     style={{ width: `${site.batteryLevel}%` }}
                                                 />
                                             </div>
-                                            <span className="text-xs text-slate-400">{site.batteryLevel}%</span>
+                                            <span className="text-xs text-slate-600">{site.batteryLevel}%</span>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 text-slate-300">
+                                    <td className="px-6 py-4 text-slate-600">
                                         {format(new Date(site.leaseExpires), 'MMM d, yyyy')}
                                     </td>
                                     <td className="px-6 py-4">
@@ -134,11 +134,11 @@ const Sites: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="px-6 py-4 border-t border-slate-800 bg-slate-950/50 text-xs text-slate-500 flex justify-between items-center">
+                <div className="px-6 py-4 border-t border-slate-200 bg-white/50 text-xs text-slate-500 flex justify-between items-center">
                     <span>Showing {filteredSites.length} sites</span>
                     <div className="flex gap-2">
-                        <button className="px-3 py-1 bg-slate-900 border border-slate-800 rounded hover:bg-slate-800 disabled:opacity-50" disabled>Previous</button>
-                        <button className="px-3 py-1 bg-slate-900 border border-slate-800 rounded hover:bg-slate-800 disabled:opacity-50" disabled>Next</button>
+                        <button className="px-3 py-1 bg-slate-50 border border-slate-200 rounded hover:bg-white disabled:opacity-50" disabled>Previous</button>
+                        <button className="px-3 py-1 bg-slate-50 border border-slate-200 rounded hover:bg-white disabled:opacity-50" disabled>Next</button>
                     </div>
                 </div>
             </div>

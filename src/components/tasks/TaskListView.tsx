@@ -28,14 +28,14 @@ const TaskListView: React.FC<TaskListViewProps> = ({ tasks, onTaskClick, selecte
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+    <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
       <table className="w-full">
-        <thead className="bg-slate-950 border-b border-slate-800">
+        <thead className="bg-white border-b border-slate-200">
           <tr>
             <th className="w-12 px-4 py-3">
               <input
                 type="checkbox"
-                className="rounded border-slate-600 bg-slate-800 text-blue-600"
+                className="rounded border-slate-600 bg-white text-blue-600"
                 checked={selectedTasks.length === tasks.length && tasks.length > 0}
                 onChange={e => {
                   if (e.target.checked) {
@@ -46,12 +46,12 @@ const TaskListView: React.FC<TaskListViewProps> = ({ tasks, onTaskClick, selecte
                 }}
               />
             </th>
-            <th className="text-left px-4 py-3 text-sm font-medium text-slate-400">Task</th>
-            <th className="text-left px-4 py-3 text-sm font-medium text-slate-400">Status</th>
-            <th className="text-left px-4 py-3 text-sm font-medium text-slate-400">Priority</th>
-            <th className="text-left px-4 py-3 text-sm font-medium text-slate-400">Assignee</th>
-            <th className="text-left px-4 py-3 text-sm font-medium text-slate-400">Due Date</th>
-            <th className="text-left px-4 py-3 text-sm font-medium text-slate-400">Progress</th>
+            <th className="text-left px-4 py-3 text-sm font-medium text-slate-600">Task</th>
+            <th className="text-left px-4 py-3 text-sm font-medium text-slate-600">Status</th>
+            <th className="text-left px-4 py-3 text-sm font-medium text-slate-600">Priority</th>
+            <th className="text-left px-4 py-3 text-sm font-medium text-slate-600">Assignee</th>
+            <th className="text-left px-4 py-3 text-sm font-medium text-slate-600">Due Date</th>
+            <th className="text-left px-4 py-3 text-sm font-medium text-slate-600">Progress</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-800">
@@ -64,13 +64,13 @@ const TaskListView: React.FC<TaskListViewProps> = ({ tasks, onTaskClick, selecte
             return (
               <tr
                 key={task.id}
-                className="hover:bg-slate-800/50 transition-colors cursor-pointer group"
+                className="hover:bg-white/50 transition-colors cursor-pointer group"
                 onClick={() => onTaskClick(task)}
               >
                 <td className="px-4 py-3" onClick={e => e.stopPropagation()}>
                   <input
                     type="checkbox"
-                    className="rounded border-slate-600 bg-slate-800 text-blue-600"
+                    className="rounded border-slate-600 bg-white text-blue-600"
                     checked={selectedTasks.includes(task.id)}
                     onChange={() => onToggleSelect(task.id)}
                   />
@@ -99,24 +99,24 @@ const TaskListView: React.FC<TaskListViewProps> = ({ tasks, onTaskClick, selecte
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
                     <User className="w-4 h-4 text-slate-500" />
-                    <span className="text-sm text-slate-300">User {task.assigneeId}</span>
+                    <span className="text-sm text-slate-600">User {task.assigneeId}</span>
                   </div>
                 </td>
                 <td className="px-4 py-3">
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
+                  <div className="flex items-center gap-2 text-sm text-slate-600">
                     <Calendar className="w-4 h-4 text-slate-500" />
                     {format(new Date(task.dueDate), 'MMM d, yyyy')}
                   </div>
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden max-w-[100px]">
+                    <div className="flex-1 h-2 bg-white rounded-full overflow-hidden max-w-[100px]">
                       <div
                         className={`h-full rounded-full ${progress === 100 ? 'bg-emerald-500' : progress > 50 ? 'bg-blue-500' : 'bg-amber-500'}`}
                         style={{ width: `${progress}%` }}
                       />
                     </div>
-                    <span className="text-xs text-slate-400 w-10">{progress}%</span>
+                    <span className="text-xs text-slate-600 w-10">{progress}%</span>
                   </div>
                 </td>
               </tr>
@@ -125,7 +125,7 @@ const TaskListView: React.FC<TaskListViewProps> = ({ tasks, onTaskClick, selecte
         </tbody>
       </table>
       {tasks.length === 0 && (
-        <div className="text-center py-12 text-slate-400">No tasks found</div>
+        <div className="text-center py-12 text-slate-600">No tasks found</div>
       )}
     </div>
   );

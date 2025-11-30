@@ -105,11 +105,11 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ tasks, onTaskClick })
     const blockedTasks = tasks.filter(t => t.status === 'blocked').length;
 
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
             {/* Header */}
-            <div className="p-4 border-b border-slate-800 bg-slate-950">
+            <div className="p-4 border-b border-slate-200 bg-white">
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-white">Task Dependencies</h3>
+                    <h3 className="text-lg font-bold text-slate-900">Task Dependencies</h3>
                     <div className="flex gap-2">
                         {hasCircularDependencies && (
                             <span className="flex items-center gap-1 text-xs bg-rose-500/10 text-rose-500 px-3 py-1 rounded-full border border-rose-500/20">
@@ -132,7 +132,7 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ tasks, onTaskClick })
             </div>
 
             {/* Graph */}
-            <div className="h-[500px] bg-slate-950">
+            <div className="h-[500px] bg-white">
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
@@ -141,31 +141,31 @@ const DependencyGraph: React.FC<DependencyGraphProps> = ({ tasks, onTaskClick })
                     attributionPosition="bottom-left"
                 >
                     <Background color="#334155" gap={16} />
-                    <Controls className="bg-slate-800 border-slate-700" />
+                    <Controls className="bg-white border-slate-200" />
                 </ReactFlow>
             </div>
 
             {/* Legend */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/50">
+            <div className="p-4 border-t border-slate-200 bg-white/50">
                 <div className="flex items-center gap-4 text-xs">
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-blue-500"></div>
-                        <span className="text-slate-400">In Progress</span>
+                        <span className="text-slate-600">In Progress</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-emerald-500"></div>
-                        <span className="text-slate-400">Completed</span>
+                        <span className="text-slate-600">Completed</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-rose-500"></div>
-                        <span className="text-slate-400">Blocked</span>
+                        <span className="text-slate-600">Blocked</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-slate-500"></div>
-                        <span className="text-slate-400">Not Started</span>
+                        <span className="text-slate-600">Not Started</span>
                     </div>
                     {criticalPath.length > 0 && (
-                        <div className="ml-auto text-slate-400">
+                        <div className="ml-auto text-slate-600">
                             Critical Path: {criticalPath.length} tasks
                         </div>
                     )}

@@ -36,30 +36,30 @@ const TaskCalendarView: React.FC<TaskCalendarViewProps> = ({ tasks, onTaskClick 
     };
 
     return (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
             {/* Header */}
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
-                <h3 className="text-lg font-bold text-white">
+            <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-white">
+                <h3 className="text-lg font-bold text-slate-900">
                     {format(currentMonth, 'MMMM yyyy')}
                 </h3>
                 <div className="flex gap-2">
                     <button
                         onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-                        className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+                        className="p-2 bg-white hover:bg-slate-100 rounded-lg transition-colors"
                     >
-                        <ChevronLeft className="w-4 h-4 text-slate-300" />
+                        <ChevronLeft className="w-4 h-4 text-slate-600" />
                     </button>
                     <button
                         onClick={() => setCurrentMonth(new Date())}
-                        className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors text-sm text-slate-300"
+                        className="px-3 py-2 bg-white hover:bg-slate-100 rounded-lg transition-colors text-sm text-slate-600"
                     >
                         Today
                     </button>
                     <button
                         onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-                        className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+                        className="p-2 bg-white hover:bg-slate-100 rounded-lg transition-colors"
                     >
-                        <ChevronRight className="w-4 h-4 text-slate-300" />
+                        <ChevronRight className="w-4 h-4 text-slate-600" />
                     </button>
                 </div>
             </div>
@@ -69,7 +69,7 @@ const TaskCalendarView: React.FC<TaskCalendarViewProps> = ({ tasks, onTaskClick 
                 {/* Day Headers */}
                 <div className="grid grid-cols-7 gap-2 mb-2">
                     {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                        <div key={day} className="text-center text-xs font-medium text-slate-400 py-2">
+                        <div key={day} className="text-center text-xs font-medium text-slate-600 py-2">
                             {day}
                         </div>
                     ))}
@@ -93,10 +93,10 @@ const TaskCalendarView: React.FC<TaskCalendarViewProps> = ({ tasks, onTaskClick 
                                 key={dateKey}
                                 className={`aspect-square border rounded-lg p-2 ${isToday
                                         ? 'border-blue-500 bg-blue-500/5'
-                                        : 'border-slate-800 bg-slate-950/50'
-                                    } hover:border-slate-700 transition-colors`}
+                                        : 'border-slate-200 bg-white/50'
+                                    } hover:border-slate-200 transition-colors`}
                             >
-                                <div className={`text-xs font-medium mb-1 ${isToday ? 'text-blue-400' : 'text-slate-400'
+                                <div className={`text-xs font-medium mb-1 ${isToday ? 'text-blue-400' : 'text-slate-600'
                                     }`}>
                                     {format(day, 'd')}
                                 </div>
@@ -126,25 +126,25 @@ const TaskCalendarView: React.FC<TaskCalendarViewProps> = ({ tasks, onTaskClick 
             </div>
 
             {/* Legend */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/50">
+            <div className="p-4 border-t border-slate-200 bg-white/50">
                 <div className="flex items-center gap-4 text-xs">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-rose-500"></div>
-                        <span className="text-slate-400">Urgent</span>
+                        <span className="text-slate-600">Urgent</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-orange-500"></div>
-                        <span className="text-slate-400">High</span>
+                        <span className="text-slate-600">High</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-amber-500"></div>
-                        <span className="text-slate-400">Medium</span>
+                        <span className="text-slate-600">Medium</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-blue-500"></div>
-                        <span className="text-slate-400">Low</span>
+                        <span className="text-slate-600">Low</span>
                     </div>
-                    <div className="ml-auto text-slate-400">
+                    <div className="ml-auto text-slate-600">
                         {tasks.length} tasks this month
                     </div>
                 </div>

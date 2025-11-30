@@ -51,25 +51,25 @@ const Copilot: React.FC = () => {
                 className={`fixed bottom-6 right-6 p-4 rounded-full shadow-2xl transition-all z-50 ${isOpen ? 'bg-rose-500 rotate-90' : 'bg-blue-600 hover:bg-blue-500'
                     }`}
             >
-                {isOpen ? <X className="w-6 h-6 text-white" /> : <Bot className="w-6 h-6 text-white" />}
+                {isOpen ? <X className="w-6 h-6 text-slate-900" /> : <Bot className="w-6 h-6 text-slate-900" />}
             </button>
 
             {/* Chat Window */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 animate-in slide-in-from-bottom-10 fade-in duration-200">
+                <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-slate-50 border border-slate-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 animate-in slide-in-from-bottom-10 fade-in duration-200">
                     {/* Header */}
-                    <div className="p-4 bg-slate-800 border-b border-slate-700 flex items-center gap-3">
+                    <div className="p-4 bg-white border-b border-slate-200 flex items-center gap-3">
                         <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center">
                             <Sparkles className="w-4 h-4 text-blue-500" />
                         </div>
                         <div>
-                            <h3 className="font-semibold text-white">TeleFlow Copilot</h3>
-                            <p className="text-xs text-slate-400">AI Assistant • Online</p>
+                            <h3 className="font-semibold text-slate-900">TeleFlow Copilot</h3>
+                            <p className="text-xs text-slate-600">AI Assistant • Online</p>
                         </div>
                     </div>
 
                     {/* Messages */}
-                    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-900">
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
                         {messages.map((msg, idx) => (
                             <div
                                 key={idx}
@@ -78,7 +78,7 @@ const Copilot: React.FC = () => {
                                 <div
                                     className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user'
                                             ? 'bg-blue-600 text-white rounded-tr-none'
-                                            : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
+                                            : 'bg-white text-slate-700 rounded-tl-none border border-slate-200'
                                         }`}
                                 >
                                     {msg.text}
@@ -89,7 +89,7 @@ const Copilot: React.FC = () => {
                     </div>
 
                     {/* Input */}
-                    <div className="p-4 bg-slate-800 border-t border-slate-700">
+                    <div className="p-4 bg-white border-t border-slate-200">
                         <div className="relative">
                             <input
                                 type="text"
@@ -97,7 +97,7 @@ const Copilot: React.FC = () => {
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                                 placeholder="Ask Copilot..."
-                                className="w-full bg-slate-900 border border-slate-700 rounded-full pl-4 pr-12 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500"
+                                className="w-full bg-slate-50 border border-slate-200 rounded-full pl-4 pr-12 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500"
                             />
                             <button
                                 onClick={handleSend}

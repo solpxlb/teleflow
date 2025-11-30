@@ -23,7 +23,7 @@ const UserManagement: React.FC = () => {
         <div className="text-center">
           <Shield className="w-16 h-16 text-slate-600 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-white mb-2">Access Denied</h2>
-          <p className="text-slate-400">Only super admins can access user management.</p>
+          <p className="text-slate-600">Only super admins can access user management.</p>
         </div>
       </div>
     );
@@ -70,8 +70,8 @@ const UserManagement: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-white">User Management</h1>
-          <p className="text-slate-400">Create and manage user accounts</p>
+          <h1 className="text-2xl font-bold text-slate-900">User Management</h1>
+          <p className="text-slate-600">Create and manage user accounts</p>
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
@@ -84,46 +84,46 @@ const UserManagement: React.FC = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
+        <div className="bg-white p-4 rounded-xl border border-slate-200">
           <div className="text-2xl font-bold text-white mb-1">{users.length}</div>
-          <div className="text-sm text-slate-400">Total Users</div>
+          <div className="text-sm text-slate-600">Total Users</div>
         </div>
-        <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
+        <div className="bg-white p-4 rounded-xl border border-slate-200">
           <div className="text-2xl font-bold text-purple-500 mb-1">
             {users.filter(u => u.role === 'super_admin').length}
           </div>
-          <div className="text-sm text-slate-400">Super Admins</div>
+          <div className="text-sm text-slate-600">Super Admins</div>
         </div>
-        <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
+        <div className="bg-white p-4 rounded-xl border border-slate-200">
           <div className="text-2xl font-bold text-blue-500 mb-1">
             {users.filter(u => u.role === 'admin').length}
           </div>
-          <div className="text-sm text-slate-400">Admins</div>
+          <div className="text-sm text-slate-600">Admins</div>
         </div>
-        <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
+        <div className="bg-white p-4 rounded-xl border border-slate-200">
           <div className="text-2xl font-bold text-emerald-500 mb-1">
             {users.filter(u => ['pm', 'team_lead', 'member', 'tech'].includes(u.role)).length}
           </div>
-          <div className="text-sm text-slate-400">Team Members</div>
+          <div className="text-sm text-slate-600">Team Members</div>
         </div>
       </div>
 
       {/* Users Table */}
-      <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-slate-900 border-b border-slate-700">
+            <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">User</th>
-                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">Email</th>
-                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">Role</th>
-                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">Created</th>
-                <th className="text-right px-6 py-4 text-sm font-semibold text-slate-300">Actions</th>
+                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">User</th>
+                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">Email</th>
+                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">Role</th>
+                <th className="text-left px-6 py-4 text-sm font-semibold text-slate-600">Created</th>
+                <th className="text-right px-6 py-4 text-sm font-semibold text-slate-600">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-700">
               {users.map(user => (
-                <tr key={user.id} className="hover:bg-slate-700/50 transition-colors">
+                <tr key={user.id} className="hover:bg-slate-100/50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <img
@@ -132,31 +132,31 @@ const UserManagement: React.FC = () => {
                         className="w-10 h-10 rounded-full border-2 border-slate-600"
                       />
                       <div>
-                        <div className="font-medium text-white">{user.name}</div>
-                        <div className="text-xs text-slate-400">ID: {user.id.slice(0, 8)}</div>
+                        <div className="font-medium text-slate-900">{user.name}</div>
+                        <div className="text-xs text-slate-600">ID: {user.id.slice(0, 8)}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-300">{user.email}</td>
+                  <td className="px-6 py-4 text-sm text-slate-600">{user.email}</td>
                   <td className="px-6 py-4">
                     <span className={`text-xs px-3 py-1 rounded-full border ${roleColors[user.role]}`}>
                       {roleLabels[user.role]}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-400">
+                  <td className="px-6 py-4 text-sm text-slate-600">
                     {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end gap-2">
                       <button
-                        className="p-2 hover:bg-slate-600 rounded-lg transition-colors text-slate-400 hover:text-white"
+                        className="p-2 hover:bg-slate-600 rounded-lg transition-colors text-slate-600 hover:text-slate-900"
                         title="Edit User"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       {user.role !== 'super_admin' && (
                         <button
-                          className="p-2 hover:bg-rose-500/10 rounded-lg transition-colors text-slate-400 hover:text-rose-500"
+                          className="p-2 hover:bg-rose-500/10 rounded-lg transition-colors text-slate-600 hover:text-rose-500"
                           title="Delete User"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -174,12 +174,12 @@ const UserManagement: React.FC = () => {
       {/* Create User Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 rounded-2xl border border-slate-700 w-full max-w-md shadow-2xl">
-            <div className="p-6 border-b border-slate-800 flex justify-between items-center">
-              <h3 className="text-xl font-bold text-white">Create New User</h3>
+          <div className="bg-slate-50 rounded-2xl border border-slate-200 w-full max-w-md shadow-2xl">
+            <div className="p-6 border-b border-slate-200 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-slate-900">Create New User</h3>
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-slate-600 hover:text-slate-900 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -193,7 +193,7 @@ const UserManagement: React.FC = () => {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-600 mb-2">
                   <UserCircle className="w-4 h-4 inline mr-2" />
                   Full Name
                 </label>
@@ -201,13 +201,13 @@ const UserManagement: React.FC = () => {
                   type="text"
                   value={newUser.name}
                   onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-600 mb-2">
                   <Mail className="w-4 h-4 inline mr-2" />
                   Email Address
                 </label>
@@ -215,13 +215,13 @@ const UserManagement: React.FC = () => {
                   type="email"
                   value={newUser.email}
                   onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-600 mb-2">
                   <Key className="w-4 h-4 inline mr-2" />
                   Password
                 </label>
@@ -229,7 +229,7 @@ const UserManagement: React.FC = () => {
                   type="password"
                   value={newUser.password}
                   onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                   required
                   minLength={8}
                 />
@@ -237,14 +237,14 @@ const UserManagement: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-600 mb-2">
                   <Shield className="w-4 h-4 inline mr-2" />
                   Role
                 </label>
                 <select
                   value={newUser.role}
                   onChange={(e) => setNewUser({ ...newUser, role: e.target.value as User['role'] })}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2 text-slate-700 focus:outline-none focus:border-blue-500"
                 >
                   <option value="member">Member</option>
                   <option value="tech">Technician</option>
@@ -259,7 +259,7 @@ const UserManagement: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="flex-1 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2 bg-white hover:bg-slate-100 text-slate-600 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>

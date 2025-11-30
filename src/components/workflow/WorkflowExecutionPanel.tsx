@@ -152,16 +152,16 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
                 {/* Header */}
-                <div className="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-950">
+                <div className="p-4 border-b border-slate-200 flex justify-between items-center bg-white">
                     <div>
-                        <h3 className="text-lg font-bold text-white">Test Workflow Execution</h3>
-                        <p className="text-sm text-slate-400">Simulate workflow with task creation</p>
+                        <h3 className="text-lg font-bold text-slate-900">Test Workflow Execution</h3>
+                        <p className="text-sm text-slate-600">Simulate workflow with task creation</p>
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-slate-400 hover:text-white transition-colors"
+                        className="text-slate-600 hover:text-slate-900 transition-colors"
                     >
                         ✕
                     </button>
@@ -170,8 +170,8 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                 {/* Content */}
                 <div className="flex-1 overflow-hidden flex">
                     {/* Left: Node Progress */}
-                    <div className="w-1/3 border-r border-slate-800 p-4 overflow-y-auto bg-slate-950/50">
-                        <h4 className="text-sm font-semibold text-slate-300 mb-3">Workflow Nodes</h4>
+                    <div className="w-1/3 border-r border-slate-200 p-4 overflow-y-auto bg-white/50">
+                        <h4 className="text-sm font-semibold text-slate-600 mb-3">Workflow Nodes</h4>
                         <div className="space-y-2">
                             {nodes.map((node, index) => {
                                 const status = getNodeStatus(index);
@@ -185,7 +185,7 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                                             ? 'bg-blue-500/10 border-blue-500/50'
                                             : status === 'completed'
                                                 ? 'bg-emerald-500/10 border-emerald-500/30'
-                                                : 'bg-slate-800 border-slate-700'
+                                                : 'bg-white border-slate-200'
                                             }`}
                                     >
                                         <div className="flex items-center gap-2 mb-1">
@@ -194,7 +194,7 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                                                 {node.type}
                                             </span>
                                         </div>
-                                        <div className="text-xs text-slate-400">{node.data.label}</div>
+                                        <div className="text-xs text-slate-600">{node.data.label}</div>
                                         {node.data.config?.assigneeId && (
                                             <div className="text-xs text-slate-500 mt-1">
                                                 → User {node.data.config.assigneeId}
@@ -209,23 +209,23 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                     {/* Right: Execution Log */}
                     <div className="flex-1 flex flex-col">
                         {/* Variables */}
-                        <div className="p-4 border-b border-slate-800 bg-slate-950/30">
-                            <h4 className="text-sm font-semibold text-slate-300 mb-2">Variables</h4>
+                        <div className="p-4 border-b border-slate-200 bg-white/30">
+                            <h4 className="text-sm font-semibold text-slate-600 mb-2">Variables</h4>
                             <div className="grid grid-cols-2 gap-2">
                                 <div>
-                                    <label className="text-xs text-slate-400">Site ID</label>
+                                    <label className="text-xs text-slate-600">Site ID</label>
                                     <input
                                         type="text"
-                                        className="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-slate-200"
+                                        className="w-full bg-white border border-slate-200 rounded px-2 py-1 text-sm text-slate-700"
                                         value={variables.siteId}
                                         onChange={(e) => setVariables({ ...variables, siteId: e.target.value })}
                                         disabled={!!currentExecution}
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-slate-400">Priority</label>
+                                    <label className="text-xs text-slate-600">Priority</label>
                                     <select
-                                        className="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-slate-200"
+                                        className="w-full bg-white border border-slate-200 rounded px-2 py-1 text-sm text-slate-700"
                                         value={variables.priority}
                                         onChange={(e) => setVariables({ ...variables, priority: e.target.value })}
                                         disabled={!!currentExecution}
@@ -240,7 +240,7 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                         </div>
 
                         {/* Execution Log */}
-                        <div className="flex-1 p-4 overflow-y-auto bg-slate-950 font-mono text-xs">
+                        <div className="flex-1 p-4 overflow-y-auto bg-white font-mono text-xs">
                             {executionLog.length === 0 ? (
                                 <div className="text-center text-slate-500 py-8">
                                     <AlertCircle className="w-8 h-8 mx-auto mb-2" />
@@ -249,7 +249,7 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                             ) : (
                                 <div className="space-y-1">
                                     {executionLog.map((log, index) => (
-                                        <div key={index} className="text-slate-300">
+                                        <div key={index} className="text-slate-600">
                                             {log}
                                         </div>
                                     ))}
@@ -260,8 +260,8 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 border-t border-slate-800 bg-slate-950 flex justify-between items-center">
-                    <div className="text-sm text-slate-400">
+                <div className="p-4 border-t border-slate-200 bg-white flex justify-between items-center">
+                    <div className="text-sm text-slate-600">
                         {currentExecution && (
                             <>
                                 Progress: {currentNodeIndex}/{nodes.length} nodes
@@ -274,7 +274,7 @@ const WorkflowExecutionPanel: React.FC<WorkflowExecutionPanelProps> = ({ templat
                     <div className="flex gap-2">
                         <button
                             onClick={handleResetExecution}
-                            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors flex items-center gap-2"
+                            className="px-4 py-2 bg-white hover:bg-slate-100 text-slate-600 rounded-lg transition-colors flex items-center gap-2"
                             disabled={!currentExecution}
                         >
                             <RotateCcw className="w-4 h-4" />
